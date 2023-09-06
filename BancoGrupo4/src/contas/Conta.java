@@ -3,9 +3,7 @@ package contas;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import pessoas.Pessoa;
-
-abstract class Conta {
+public abstract class Conta {
 	protected int numero;
 	protected String titular;
 	protected double saldo;
@@ -58,14 +56,12 @@ abstract class Conta {
 		} else {
 			System.out.println("Saldo insuficiente para transferência.");
 		}
-	
 	}
 	
 	public void imprimirExtrato(String acao) {
 		Date data = new Date();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM HH:mm");
 		String dataFormatada = dateFormat.format(data);
-		String idFormatado = String.format("%04d", Pessoa.getId());
-		System.out.println(dataFormatada + " - " + this.numero + this.tipo + idFormatado + " - " + acao);
+		System.out.println(dataFormatada + " - " + this.numero + this.tipo + " - " + acao);
 	}
 }

@@ -7,7 +7,7 @@ public abstract class Executivo extends Funcionario {
 		return senhaExecutivo;
 	}
 
-	public Executivo(String nome, String cpf, String id, int senha, double salario, int senhaExecutivo) {
+	public Executivo(String nome, String cpf, int id, String senha, double salario, int senhaExecutivo) {
 		super(nome, cpf, id, senha, salario);
 		this.senhaExecutivo = senhaExecutivo;
 	}

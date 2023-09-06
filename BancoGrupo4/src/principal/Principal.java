@@ -10,8 +10,8 @@ public class Principal {
 		//Input in = new Input();
 		
 		//in.Scan();
-		Cliente cliente1 = new Cliente("Arthur", "176.853.543-32", "0001", 654, "Cliente");
-		Cliente cliente2 = new Cliente("Fulano", "129.876.543-21", "0002", 154, "Cliente");
+		Cliente cliente1 = new Cliente("Arthur", "176.853.543-32", 0001, "seila1234", "Cliente");
+		Cliente cliente2 = new Cliente("Fulano", "129.876.543-21", 0002, "naosei987", "Cliente");
 		System.out.println("--------- Demonstração ---------\n");
 		
 		ContaCorrente contaCorrente1 = new ContaCorrente(123456789, cliente1.getNome(), 1000.0, 5.0, 1000.0);

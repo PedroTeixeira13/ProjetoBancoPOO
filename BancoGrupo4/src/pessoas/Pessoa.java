@@ -4,8 +4,8 @@ public abstract class Pessoa {
 	public String nome;
 	protected String cpf;
 	protected String tipo;
-	protected static String id;
-	protected int senha;
+	protected int id;
+	protected String senha;
 
 	public String getNome() {
 		return nome;
@@ -15,21 +15,21 @@ public abstract class Pessoa {
 		return cpf;
 	}
 
-	public static String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public int getSenha() {
+	public String getSenha() {
 		return senha;
 	}
 
 	public Pessoa() {
 	}
 	
-	public Pessoa(String nome, String cpf, String id, int senha, String tipo) {
+	public Pessoa(String nome, String cpf, int id, String senha, String tipo) {
 		this.nome = nome;
 		this.cpf = cpf;
-		Pessoa.id = id;
+		this.id = id;
 		this.tipo = tipo;
 		this.senha = senha;
 	}

@@ -12,7 +12,7 @@ public class Diretor extends Executivo {
 		return capital;
 	}
 
-	public Diretor(String nome, String cpf, String id, int senha, double salario, int senhaExecutivo, String acoes,
+	public Diretor(String nome, String cpf, int id, String senha, double salario, int senhaExecutivo, String acoes,
 			double capital) {
 		super(nome, cpf, id, senha, salario, senhaExecutivo);
 		this.acoes = acoes;
