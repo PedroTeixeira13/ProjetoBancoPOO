@@ -1,18 +1,18 @@
 package contas;
 
 public class ContaCorrente extends Conta {
-    protected double tarifa;
-    protected double limite;
+	protected double tarifa;
+	protected double limite;
 
-    public double getTarifa() {
-        return tarifa;
-    }
+	public double getTarifa() {
+		return tarifa;
+	}
 
-    public double getLimite() {
-        return limite;
-    }
+	public double getLimite() {
+		return limite;
+	}
 
-    public ContaCorrente() {
+	public ContaCorrente() {
 		super();
 		this.tipo = "CC";
 	}
@@ -24,21 +24,32 @@ public class ContaCorrente extends Conta {
 		this.limite = limite;
 	}
 
-    @Override
-    public boolean sacar(double valor) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'sacar'");
-    }
+	@Override
+	public void sacar(double valor) {
+		if (saldo + limite >= valor + tarifa) {
+			saldo -= valor;
+			saldo -= tarifa;
+			imprimirExtrato("Saque de " + valor);
+		} else if (saldo + limite < valor + tarifa) {
+			System.out.println("Saldo insuficiente ou ultrapassou o limite.");
+		}
+	}
 
-    @Override
-    public void depositar(double valor) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'depositar'");
-    }
+	@Override
+	public void depositar(double valor) {
+		this.saldo += valor;
+		imprimirExtrato("Depósito de " + valor);
+	}
 
-    @Override
-    public boolean transferir(Conta destino, double valor) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'transferir'");
-    }
+	@Override
+	public void transferir(Conta destino, double valor) {
+		if (saldo >= valor) {
+			saldo -= valor;
+			this.saldo += valor;
+			imprimirExtrato("Transferência de " + valor + " para " + destino.getTitular());
+		} else if (saldo < valor) {
+			System.out.println("Saldo insuficiente para transferência.");
+		}
+	}
+
 }

@@ -1,30 +1,37 @@
 package pessoas;
 
 public abstract class Pessoa {
-    protected String nome;
-    protected String cpf;
-    protected int id;
-    protected int senha;
+	public String nome;
+	protected String cpf;
+	protected String tipo;
+	protected static String id;
+	protected int senha;
 
-    public String getNome() {
-        return nome;
-    }
-    public String getCpf() {
-        return cpf;
-    }
-    public int getId() {
-        return id;
-    }
-    public int getSenha() {
-        return senha;
-    }
-    public Pessoa() {
-    }
+	public String getNome() {
+		return nome;
+	}
 
-    public Pessoa(String nome, String cpf, int id, int senha) {
-        this.nome = nome;
-        this.cpf = cpf;
-        this.id = id;
-        this.senha = senha;
-    }
+	public String getCpf() {
+		return cpf;
+	}
+
+	public static String getId() {
+		return id;
+	}
+
+	public int getSenha() {
+		return senha;
+	}
+
+	public Pessoa() {
+	}
+	
+	public Pessoa(String nome, String cpf, String id, int senha, String tipo) {
+		this.nome = nome;
+		this.cpf = cpf;
+		Pessoa.id = id;
+		this.tipo = tipo;
+		this.senha = senha;
+	}
+
 }
