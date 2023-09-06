@@ -1,7 +1,7 @@
 package pessoas;
 
 public abstract class Pessoa {
-	public String nome;
+	protected String nome;
 	protected String cpf;
 	protected String tipo;
 	protected int id;

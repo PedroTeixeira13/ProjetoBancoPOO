@@ -25,28 +25,28 @@ public class ContaCorrente extends Conta {
 	}
 
 	@Override
-	public void sacar(double valor) {
+	public void sacar(Conta origem , double valor) {
 		if (saldo + limite >= valor + tarifa) {
 			saldo -= valor;
 			saldo -= tarifa;
-			imprimirExtrato("Saque de " + valor);
+			imprimirExtrato("Saque de " + valor + " na conta de " + origem.getTitular());
 		} else if (saldo + limite < valor + tarifa) {
 			System.out.println("Saldo insuficiente ou ultrapassou o limite.");
 		}
 	}
 
 	@Override
-	public void depositar(double valor) {
+	public void depositar(Conta origem, double valor) {
 		this.saldo += valor;
-		imprimirExtrato("Depósito de " + valor);
+		imprimirExtrato(origem.getTitular() + "Depósito de " + valor);
 	}
 
 	@Override
-	public void transferir(Conta destino, double valor) {
+	public void transferir(Conta origem, Conta destino, double valor) {
 		if (saldo >= valor) {
 			saldo -= valor;
 			this.saldo += valor;
-			imprimirExtrato("Transferência de " + valor + " para " + destino.getTitular());
+			imprimirExtrato("Transferência de " + origem.getTitular() + " para " + destino.getTitular() + " no valor de " + valor);
 		} else if (saldo < valor) {
 			System.out.println("Saldo insuficiente para transferência.");
 		}

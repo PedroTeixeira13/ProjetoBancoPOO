@@ -1,14 +1,14 @@
 package contas;
 
-import java.text.SimpleDateFormat;
+import java.text.SimpleDateFormat;  
 import java.util.Date;
 
 public abstract class Conta {
 	protected int numero;
 	protected String titular;
 	protected double saldo;
-	protected String tipo;
-
+	protected String tipo;	
+	
 	public int getNumero() {
 		return numero;
 	}
@@ -34,25 +34,24 @@ public abstract class Conta {
 		this.saldo = saldo;
 	}
 
-	public void sacar(double valor) {
+	public void sacar(Conta origem, double valor) {
 		if (saldo >= valor) {
 			saldo -= valor;
-			imprimirExtrato("Saque de " + valor);
+			imprimirExtrato("Saque de " + valor + " na conta de " + origem.getTitular());
 		} else {
 			System.out.println("Saldo insuficiente.");
 		}
 	}
 
-	public void depositar(double valor) {
+	public void depositar(Conta origem, double valor) {
 		this.saldo += valor;
-		imprimirExtrato("Depósito de " + valor);
+		imprimirExtrato(origem.getTitular() + "Depósito de " + valor);
 	}
 
-	public void transferir(Conta destino, double valor) {
+	public void transferir(Conta origem, Conta destino, double valor) {
 		if (saldo >= valor) {
-			saldo -= valor;
-			destino.depositar(valor);
-			imprimirExtrato("Transferência de " + valor + " para " + destino.getTitular());
+			destino.depositar(origem, valor);
+			imprimirExtrato("Transferência de " + origem.getTitular() + " para " + destino.getTitular() + " no valor de " + valor);
 		} else {
 			System.out.println("Saldo insuficiente para transferência.");
 		}

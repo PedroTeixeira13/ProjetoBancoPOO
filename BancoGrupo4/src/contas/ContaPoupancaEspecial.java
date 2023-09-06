@@ -8,23 +8,23 @@ public class ContaPoupancaEspecial extends ContaPoupanca {
 	}
 
 	public ContaPoupancaEspecial(int numero, String titular, double saldo, double rendimento, String cartaoDebito) {
-		super(numero, titular, saldo, rendimento);
+		super(numero, titular, saldo,rendimento);
 		this.tipo = "CPE";
 		this.cartaoDebito = cartaoDebito;
 	}
 
 	@Override
-	public void sacar(double valor) {
+	public void sacar(Conta origem, double valor) {
 		this.saldo -= valor;
 	}
 
 	@Override
-	public void depositar(double valor) {
+	public void depositar(Conta origem, double valor) {
 		this.saldo += valor;
 	}
 
 	@Override
-	public void transferir(Conta destino, double valor) {
+	public void transferir(Conta origem, Conta destino, double valor) {
 		throw new UnsupportedOperationException("Unimplemented method 'transferir'");
 	}
 
