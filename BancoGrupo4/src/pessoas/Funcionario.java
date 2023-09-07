@@ -1,10 +1,9 @@
 package pessoas;
 
-public class Funcionario extends Pessoa {
-	protected double salario;
+public abstract class Funcionario extends Pessoa {
+	private String cargo;
 
-	public Funcionario(String nome, String cpf, int id, String senha, double salario) {
-		super(nome, cpf, id, senha, "Funcionario");
-		this.salario = salario;
+	public String getCargo() {
+		return cargo;
 	}
 }
