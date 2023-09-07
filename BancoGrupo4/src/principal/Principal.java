@@ -1,9 +1,7 @@
 package principal;
 
-import java.util.Scanner;
-
+import java.util.Scanner; 
 import pessoas.Cliente;
-import pessoas.Pessoa;
 
 public class Principal {
 	public static void main(String[] args) {
@@ -19,5 +17,6 @@ public class Principal {
 //		Pessoa c2 = new Cliente("Pedro", "01987654321", "areia123");
 	
 		System.out.println(c.getNome());
+		sc.close();
 	}
 }
