@@ -1,6 +1,6 @@
 package dados;
 
-import java.io.File;
+import java.io.File; 
 import java.util.List;
 import java.util.Scanner;
 
@@ -21,7 +21,7 @@ public class PegaDados {
         Scanner sc = new Scanner(new File(caminho));
 
         String linha = "";
-
+        
         while (true) {
 
             linha = sc.nextLine();
@@ -30,16 +30,16 @@ public class PegaDados {
                 String [] divide = linha.split(",");
 
                 if(divide[2] == (PessoaE.Diretor.name())) {
-                    Diretor d = new Diretor(divide[0], divide[1], divide[3], divide[2]);
+                    Diretor d = new Diretor(divide[0], divide[1], divide[2], divide[3]);
                     listaPessoa.add(d);
                 } else if(divide[2] == (PessoaE.Gerente.name())) {
-                    Gerente g = new Gerente(divide[0], divide[1], divide[3], divide[2]);
+                    Gerente g = new Gerente(divide[0], divide[1], divide[2], divide[3]);
                     listaPessoa.add(g);
                 } else if(divide[2] == (PessoaE.Presidente.name())) {
-                    Presidente p = new Presidente(divide[0], divide[1], divide[3], divide[2]);
+                    Presidente p = new Presidente(divide[0], divide[1], divide[2], divide[3]);
                     listaPessoa.add(p);
                 } else if(divide[2] == (PessoaE.Cliente.name())) {
-                    Cliente c = new Cliente(divide[0], divide[1], divide[3], divide[2]);
+                    Cliente c = new Cliente(divide[0], divide[1], divide[2], divide[3]);
                     listaPessoa.add(c);
                 }
             } else {

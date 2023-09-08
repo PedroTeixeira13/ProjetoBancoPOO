@@ -7,6 +7,10 @@ public class ContaCorrente extends Conta {
 	public ContaCorrente() {
 	}
 
+	public ContaCorrente(String cpfTitular, double saldo, int agencia, String tipo) {
+		super(cpfTitular, saldo, agencia, tipo);
+	}
+
 	public double getTarifa() {
 		return tarifa;
 	}
@@ -14,23 +18,7 @@ public class ContaCorrente extends Conta {
 	public double getLimite() {
 		return limite;
 	}
-
-	public ContaCorrente(String cpfTitular, double saldo, int agencia, String tipo, double tarifa, double limite) {
-		this.cpfTitular = cpfTitular;
-		this.saldo = saldo;
-		this.agencia = agencia;
-		this.tipo = tipo;
-		this.tarifa = tarifa;
-		this.limite = limite;
-	}
-
-		public ContaCorrente(String cpfTitular, double saldo, int agencia, String tipo) {
-		this.cpfTitular = cpfTitular;
-		this.saldo = saldo;
-		this.agencia = agencia;
-		this.tipo = tipo;
-	}
-
+	
 	@Override
 	public String sacar(double valor) {
 		if (this.getSaldo() > valor) {
