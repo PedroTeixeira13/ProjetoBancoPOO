@@ -13,7 +13,7 @@ public class Principal {
 		
 		
 		
-		Cliente c = new Cliente (nome, "12345697810", "pedra123");
+		// Cliente c = new Cliente (nome, "12345697810", "pedra123");
 //		Pessoa c1 = new Cliente("Arthur","12345678910", "gelo123");
 //		Pessoa c2 = new Cliente("Pedro", "01987654321", "areia123";
 		sc.close();
