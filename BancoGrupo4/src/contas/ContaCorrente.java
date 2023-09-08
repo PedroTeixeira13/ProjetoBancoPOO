@@ -24,6 +24,13 @@ public class ContaCorrente extends Conta {
 		this.limite = limite;
 	}
 
+		public ContaCorrente(String cpfTitular, double saldo, int agencia, String tipo) {
+		this.cpfTitular = cpfTitular;
+		this.saldo = saldo;
+		this.agencia = agencia;
+		this.tipo = tipo;
+	}
+
 	@Override
 	public String sacar(double valor) {
 		if (this.getSaldo() > valor) {

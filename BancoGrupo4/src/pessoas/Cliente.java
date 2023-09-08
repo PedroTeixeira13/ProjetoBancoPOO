@@ -26,13 +26,19 @@ Caso o usuário seja um Cliente, o sistema fornecerá um menu com opções de:
 */
 
 public class Cliente extends Pessoa {
+	private String cargo;
+
+	public String getCargo() {
+		return cargo;
+	}
 
 	public Cliente() {
 		super();
 	}
 
-	public Cliente(String nome, String cpf, String senha) {
+	public Cliente(String nome, String cpf, String senha, String cargo) {
 		super(nome, cpf, senha);
+		this.cargo = cargo;
 	}
 
 	public String getNome() {

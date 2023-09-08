@@ -18,6 +18,13 @@ public class ContaPoupanca extends Conta {
 		this.rendimento = rendimento;
 	}
 
+		public ContaPoupanca(String cpfTitular, double saldo, int agencia, String tipo) {
+		this.cpfTitular = cpfTitular;
+		this.saldo = saldo;
+		this.agencia = agencia;
+		this.tipo = tipo;
+	}
+
 	@Override
 	public String sacar(double valor) {
 		if (this.getSaldo() > valor) {
