@@ -1,6 +1,8 @@
 package principal;
 
-import java.util.Scanner; 
+import java.util.Scanner;
+
+import menu.Menu;
 import pessoas.Cliente;
 
 public class Principal {
@@ -10,8 +12,7 @@ public class Principal {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Digite seu nome: \n");
 		nome = sc.nextLine();
-		
-		
+				
 		
 		// Cliente c = new Cliente (nome, "12345697810", "pedra123");
 //		Pessoa c1 = new Cliente("Arthur","12345678910", "gelo123");
