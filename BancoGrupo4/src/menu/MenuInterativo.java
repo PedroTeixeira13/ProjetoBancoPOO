@@ -132,7 +132,7 @@ public class MenuInterativo {
 						opcao2 = sc.nextInt();
 						switch(opcao2) {
 						case 1:
-							//O sistema deverá imprimir o saldo na tela do terminal
+							System.out.println("Saldo atual: "+ c.getSaldo());
 						case 2:
 						RelContaCorrente.relatorioCC(c);
 						
