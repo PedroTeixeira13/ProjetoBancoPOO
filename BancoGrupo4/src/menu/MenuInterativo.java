@@ -134,10 +134,17 @@ public class MenuInterativo {
 						case 1:
 							System.out.println("Saldo atual: "+ c.getSaldo());
 						case 2:
-						RelContaCorrente.relatorioCC(c);
+							RelContaCorrente.relatorioCC(c);
 						
 						case 3: 
-							//Relatório de Rendimento da poupança
+							System.out.println("Digite o valor: ");
+							double valor = sc.nextDouble();
+							System.out.println("Digite a quantidade de dias: ");
+							int dias = sc.nextInt();
+							double total = valor * dias * 0.003;
+							System.out.println("Seu rendimento em " + dias + " será: R$" + total );
+							
+							
 						case 4:
 							//Desafio seguro de vida
 						}
