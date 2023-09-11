@@ -6,6 +6,7 @@ import java.util.Scanner;
 import contas.Conta;
 import enums.PessoaE;
 import pessoas.Pessoa;
+import relatorios.RelContaCorrente;
 
 public class MenuInterativo {
 
@@ -133,7 +134,8 @@ public class MenuInterativo {
 						case 1:
 							//O sistema deverá imprimir o saldo na tela do terminal
 						case 2:
-							//Relatório de tributação da conta corrente
+						RelContaCorrente.relatorioCC(c);
+						
 						case 3: 
 							//Relatório de Rendimento da poupança
 						case 4:
