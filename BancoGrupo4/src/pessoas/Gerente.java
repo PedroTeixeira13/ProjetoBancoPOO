@@ -1,19 +1,14 @@
 package pessoas;
 
 public class Gerente extends Funcionario {
-	protected int agenciaGere;
+	private int agenciaGere;
 	
 	public Gerente() {
 		super();
 	}
 	
-	public Gerente(String nome, String cpf, String senha, String cargo, int agenciaGere) {
-		super(nome, cpf, senha, cargo);
+	public Gerente(String nome, String cpf, String cargo, String senha, int agenciaGere) {
+		super(nome, cpf, cargo, senha);
 		this.agenciaGere = agenciaGere;
 	}
-
-	public Gerente(String nome, String cpf, String senha, String cargo) {
-		super(nome, cpf, senha, cargo);
-	}
-
 }

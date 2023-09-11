@@ -1,13 +1,13 @@
 package contas;
 
 public abstract class Conta {
-	protected String cpfTitular;
-	protected double saldo;
-	protected int agencia;
-	protected String tipo;
-	protected final double taxDeposito = 0.10;
-	protected final double taxSaque = 0.10;
-	protected final double taxTransferencia = 0.20;
+	private String cpfTitular;
+	private double saldo;
+	private int agencia;
+	private String tipo;
+	private final double taxDeposito = 0.10;
+	private final double taxSaque = 0.10;
+	private final double taxTransferencia = 0.20;
 
 	public String getCpfTitular() {
 		return cpfTitular;
@@ -21,6 +21,10 @@ public abstract class Conta {
 		return agencia;
 	}
 	
+	public void setSaldo(double saldo) {
+		this.saldo = saldo;
+	}
+
 	public String getTipo() {
 		return tipo;
 	}
@@ -35,12 +39,26 @@ public abstract class Conta {
 	public Conta() {
 	}	
 	
-	public abstract String sacar(double valor);
+	public String sacar(double valor) {
+		if (this.getSaldo() > valor) {
+			this.saldo -= valor - taxSaque;
+			return "Saque realizado com sucesso";
+		} else {
+			return "Saldo insuficiente";
+		}
+	}
 	
-	public abstract String depositar(double valor);
+	public String depositar(double valor) {
+		this.saldo += valor - taxDeposito;
+		return "Depósito realizado com sucesso";
+	}
 	
-	public abstract String transferir(Conta destino, double valor);
-
-	
+	public String transferir(Conta destino, double valor) {
+		if (this.getSaldo() > valor) {
+			destino.saldo += valor;
+			this.saldo -= valor - taxTransferencia;
+			return "Transferência realizada com sucesso";
+		} else
+			return "Saldo insuficiente";
+	}
 }
-

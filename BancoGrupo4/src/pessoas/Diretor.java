@@ -6,8 +6,8 @@ public class Diretor extends Funcionario {
 		super();
 	}
 
-	public Diretor(String nome, String cpf, String senha, String cargo) {
-		super(nome, cpf, senha, cargo);
+	public Diretor(String nome, String cpf, String cargo, String senha) {
+		super(nome, cpf, cargo, senha);
 	}
 
 }
