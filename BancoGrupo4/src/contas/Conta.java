@@ -71,32 +71,27 @@ public abstract class Conta {
 	public Conta() {
 	}	
 	
-	public String sacar(double valor) {
+	public void sacar(double valor) {
 		if (this.getSaldo() > valor) {
 			this.saldo -= valor + taxSaque;
 			this.operacoes += valor;
 			this.taxaSaque += taxSaque;
-			return "Saque realizado com sucesso";
-		} else {
-			return "Saldo insuficiente";
+
 		}
 	}
 	
-	public String depositar(double valor) {
+	public void depositar(double valor) {
 		this.saldo += valor - taxDeposito;
 		this.operacoes += valor;
 		this.taxaDeposito += taxDeposito;
-		return "Depósito realizado com sucesso";
 	}
 	
-	public String transferir(Conta destino, double valor) {
+	public void transferir(Conta destino, double valor) {
 		if (this.getSaldo() > valor) {
 			destino.saldo += valor;
-			this.saldo -= valor - taxTransferencia;
+			this.saldo -= (valor - taxTransferencia);
 			this.operacoes += valor;
 			this.taxaTransferencia += taxTransferencia;
-			return "Transferência realizada com sucesso";
-		} else
-			return "Saldo insuficiente";
+		} 
 	}
 }
