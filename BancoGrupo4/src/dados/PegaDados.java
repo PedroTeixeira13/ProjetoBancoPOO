@@ -19,7 +19,7 @@ import pessoas.Presidente;
 public class PegaDados {
     public static void leitorPessoa(String caminho, List<Pessoa> listaPessoa) throws IOException {
 
-    	BufferedReader buffRead = new BufferedReader(new FileReader(caminho));
+        BufferedReader buffRead = new BufferedReader(new FileReader(caminho));
 
         String linha = "";
         

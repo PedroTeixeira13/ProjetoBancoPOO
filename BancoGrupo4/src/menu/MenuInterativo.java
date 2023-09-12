@@ -27,6 +27,12 @@ public class MenuInterativo {
 				cpf = sc.next();
 				System.out.println("Digite sua senha: ");
 				String senha = sc.next();
+				for (int i = 0; i < listaConta.size(); i++) {
+					c1 = listaConta.get(i);
+					if (c1.getCpfTitular().equals(cpf)) {
+						c = listaConta.get(i);
+					}
+				}
 				for (int i = 0; i < listaPessoa.size(); i++) {
 					p1 = listaPessoa.get(i);
 					if (p1.getCpf().equals(cpf)) {
@@ -34,12 +40,6 @@ public class MenuInterativo {
 					}
 				}
 
-				for (int i = 0; i < listaConta.size(); i++) {
-					c1 = listaConta.get(i);
-					if (c1.getCpfTitular().equals(cpf)) {
-						c = listaConta.get(i);
-					}
-				}
 
 				if (p.getCpf().equals(cpf) && p.getCargo().equals(PessoaE.Cliente.name())) {
 					if (p.getCpf().equals(cpf) && p.getSenha().equals(senha)) {
@@ -47,7 +47,7 @@ public class MenuInterativo {
 						menuCliente(listaPessoa, p, c, listaConta);
 						continua = false;
 					} else {
-						System.out.println("01Credenciais nao encontradas");
+						System.out.println("Credenciais nao encontradas");
 						menu(listaPessoa, listaConta);
 					}
 
@@ -57,7 +57,7 @@ public class MenuInterativo {
 						// menuGerente(listaPessoa,p,c,listaConta)
 						continua = false;
 					} else {
-						System.out.println("02Credenciais nao encontradas");
+						System.out.println("Credenciais nao encontradas");
 						menu(listaPessoa, listaConta);
 					}
 
@@ -67,7 +67,7 @@ public class MenuInterativo {
 						// menuDiretor(listaPessoa,p,c,listaConta)
 						continua = false;
 					} else {
-						System.out.println("03Credenciais nao encontradas");
+						System.out.println("Credenciais nao encontradas");
 						menu(listaPessoa, listaConta);
 					}
 
@@ -77,14 +77,14 @@ public class MenuInterativo {
 						// menuPresidente(listaPessoa,p,c,listaConta)
 						continua = false;
 					} else {
-						System.out.println("04Credenciais nao encontradas");
+						System.out.println("Credenciais nao encontradas");
 						menu(listaPessoa, listaConta);
 					}
 				}
 			} while (continua);
 			
 		} catch (NullPointerException error) {
-			System.out.println("05Credenciais nao encontradas");
+			System.out.println("Credenciais nao encontradas");
 			menu(listaPessoa, listaConta);
 		}
 
@@ -114,7 +114,7 @@ public class MenuInterativo {
 					System.out.println("1 - Saque");
 					System.out.println("2 - Depósito");
 					System.out.println("3 - Transferência para outra conta");
-					System.out.println("4 - Sair");
+					System.out.println("4 - Voltar");
 					System.out.print("Escolha uma opção: ");
 					opcao = sc.nextInt();
 					switch (opcao) {
@@ -122,7 +122,16 @@ public class MenuInterativo {
 						try {
 							System.out.print("Qual o valor que deseja sacar: ");
 							valor = sc2.nextDouble();
-							c.sacar(valor);
+							if (valor < c.getSaldo() + c.getTaxSaque()) {
+								c.sacar(valor);
+								Thread.sleep(500);
+								System.out.println("Saque realizado com sucesso!\n\n");
+								System.out.println("Seu novo saldo é: R$" + c.getSaldo());
+							} else {
+								System.out.println("Saldo insuficiente!\n\n");
+								System.out.println("Seu saldo é de: R$" + c.getSaldo());
+							}
+							Thread.sleep(2000);
 						} catch (InputMismatchException error) {
 							System.out.println("O valor deve ser um número real");
 						}
@@ -134,7 +143,7 @@ public class MenuInterativo {
 						break;
 					case 3:
 						Conta cDestino = null;
-						System.out.print("Digite o Cpf da conta destino: ");
+						System.out.print("Digite o CPF da conta destino: ");
 						String destino = sc2.next();
 						System.out.print("\nQual o valor que deseja transferir: ");
 						valor = sc2.nextDouble();
@@ -161,12 +170,13 @@ public class MenuInterativo {
 					System.out.println("2 - Relatório de tributação da conta corrente");
 					System.out.println("3 - Relatório de Rendimento da poupança");
 					System.out.println("4 - Contratar seguro de vida");
-					System.out.println("5 - Sair");
+					System.out.println("5 - Voltar");
 					System.out.print("Escolha uma opção: ");
 					opcao2 = sc.nextInt();
 					switch (opcao2) {
 					case 1:
-						System.out.print(c.toString());
+						System.out.println("\n\nSaldo em conta: " + c.getSaldo() + "\n\n");
+						Thread.sleep(2000);
 						break;
 					case 2:
 						RelContaCorrente.relatorioCC(c);

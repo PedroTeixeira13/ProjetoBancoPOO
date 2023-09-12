@@ -13,6 +13,18 @@ public abstract class Conta {
 	private double taxaSaque = 0.0;
 	private double taxaTransferencia = 0.0;
 	
+	public double getTaxDeposito() {
+		return taxDeposito;
+	}
+
+	public double getTaxSaque() {
+		return taxSaque;
+	}
+
+	public double getTaxTransferencia() {
+		return taxTransferencia;
+	}
+
 	public double getTaxaDeposito() {
 		return taxaDeposito;
 	}
@@ -61,7 +73,7 @@ public abstract class Conta {
 	
 	public String sacar(double valor) {
 		if (this.getSaldo() > valor) {
-			this.saldo -= valor - taxSaque;
+			this.saldo -= valor + taxSaque;
 			this.operacoes += valor;
 			this.taxaSaque += taxSaque;
 			return "Saque realizado com sucesso";

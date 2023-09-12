@@ -12,13 +12,14 @@ import pessoas.Pessoa;
 public class Principal {
 	public static void main(String[] args) {
 		
-		String caminho = ".\\src\\dados\\teste.txt";	
+		String caminho = "BancoGrupo4\\src\\dados\\teste.txt";	
 		List<Pessoa> listaPessoa = new ArrayList<>();
         List<Conta> listaConta = new ArrayList<>();
         
 		Menu.logo();
         try {
 			PegaDados.leitorPessoa(caminho, listaPessoa);
+			PegaDados.leConta(caminho, listaConta);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
