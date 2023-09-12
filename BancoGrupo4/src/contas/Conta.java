@@ -89,7 +89,7 @@ public abstract class Conta {
 	public void transferir(Conta destino, double valor) {
 		if (this.getSaldo() > valor) {
 			destino.saldo += valor;
-			this.saldo -= (valor - taxTransferencia);
+			this.saldo -= (valor + taxTransferencia);
 			this.operacoes += valor;
 			this.taxaTransferencia += taxTransferencia;
 		} 
