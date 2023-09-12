@@ -189,7 +189,7 @@ public class MenuInterativo {
 		} while (opcao != 4);
 	}
 
-	public static void relatorios(Conta c) throws InterruptedException {
+	public static void relatorios(Conta c) throws Exception {
 		int opcao2;
 		do {
 			System.out.println("\nRelatórios");
@@ -206,7 +206,7 @@ public class MenuInterativo {
 				Thread.sleep(2000);
 				break;
 			case 2:  
-				//RelContaCorrente.relatorioCC(c);
+				RelContaCorrente.relatorioCC(c);
 				break;
 			case 3:
 				System.out.println("Digite o valor: ");

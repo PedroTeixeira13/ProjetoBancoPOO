@@ -1,16 +1,17 @@
 package relatorios;
 
 import java.io.PrintWriter;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import contas.Conta;
-
-import pessoas.Pessoa;
 
 public class RelContaCorrente {
     public static void relatorioCC(Conta c) throws Exception {
 
-        PrintWriter ps = new PrintWriter("..\\src\\TestesImpressao.txt");
+        String dataHoraCompleta = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
+        PrintWriter ps = new PrintWriter("BancoGrupo4\\src\\relatorios\\" + dataHoraCompleta + ".txt");
+        
         ps.print("Total gasto em operações: " + c.getOperacoes() + "\n\nTotal taxação de saque: " + c.getTaxaSaque()
         + "\nTotal taxação de deposito: " + c.getTaxaDeposito() + "\nTotal taxação de transferencia: " + c.getTaxaTransferencia());
         ps.close();
