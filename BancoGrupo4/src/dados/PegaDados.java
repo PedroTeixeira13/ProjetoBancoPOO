@@ -1,30 +1,31 @@
 package dados;
 
-import java.io.File; 
+import java.io.BufferedReader; 
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.List;
-import java.util.Scanner;
 
 import contas.Conta;
 import contas.ContaCorrente;
 import contas.ContaPoupanca;
 import enums.ContaE;
 import enums.PessoaE;
+import pessoas.Cliente;
 import pessoas.Diretor;
 import pessoas.Gerente;
 import pessoas.Pessoa;
 import pessoas.Presidente;
-import pessoas.Cliente;
 
 public class PegaDados {
-    public static void leitorPessoa(String caminho, List<Pessoa> listaPessoa) throws Exception {
+    public static void leitorPessoa(String caminho, List<Pessoa> listaPessoa) throws IOException {
 
-        Scanner sc = new Scanner(new File(caminho));
+    	BufferedReader buffRead = new BufferedReader(new FileReader(caminho));
 
         String linha = "";
         
         while (true) {
 
-            linha = sc.nextLine();
+            linha = buffRead.readLine();
 
             if (linha != null) {
                 String [] divide = linha.split(",");
@@ -46,17 +47,17 @@ public class PegaDados {
                 break;
             }
         }
-        sc.close();
+        buffRead.close();
     }
 
     public static void leConta(String caminho, List<Conta> listaConta) throws Exception {
 
-        Scanner sc = new Scanner(new File(caminho));
+    	BufferedReader buffRead = new BufferedReader(new FileReader(caminho));
 
         String linha = "";
 
         while (true) {
-            linha = sc.nextLine();
+        	linha = buffRead.readLine();
 
             if(linha != null) {
                 String [] divide = linha.split(",");
@@ -72,6 +73,6 @@ public class PegaDados {
                 break;
             }
         }
-        sc.close();
+        buffRead.close();
     }
 }
