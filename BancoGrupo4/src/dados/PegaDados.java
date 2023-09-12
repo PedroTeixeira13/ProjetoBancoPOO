@@ -25,7 +25,7 @@ public class PegaDados {
         
         while (true) {
 
-            linha = buffRead.readLine();
+        	linha = buffRead.readLine();
 
             if (linha != null) {
                 String [] divide = linha.split(",");

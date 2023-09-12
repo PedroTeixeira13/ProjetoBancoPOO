@@ -1,17 +1,17 @@
 package contas;
 
 public abstract class Conta {
-	private String cpfTitular;
-	private double saldo;
-	private int agencia;
-	private String tipo;
-	private final double taxDeposito = 0.10;
-	private final double taxSaque = 0.10;
-	private final double taxTransferencia = 0.20;
-	private double operacoes = 0.0;
-	private double taxaDeposito = 0.0;
-	private double taxaSaque = 0.0;
-	private double taxaTransferencia = 0.0;
+	protected String cpfTitular;
+	protected double saldo;
+	protected int agencia;
+	protected String tipo;
+	protected final double taxDeposito = 0.10;
+	protected final double taxSaque = 0.10;
+	protected final double taxTransferencia = 0.20;
+	protected double operacoes = 0.0;
+	protected double taxaDeposito = 0.0;
+	protected double taxaSaque = 0.0;
+	protected double taxaTransferencia = 0.0;
 	
 	public double getTaxDeposito() {
 		return taxDeposito;
