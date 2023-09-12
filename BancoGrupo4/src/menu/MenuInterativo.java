@@ -114,7 +114,7 @@ public class MenuInterativo {
 		} while (op != 3);
 	}
 
-	public static void movimentacoesConta(Conta c, List<Conta> listaConta) {
+	public static void movimentacoesConta(Conta c, List<Conta> listaConta) throws InterruptedException {
 		int opcao;
 		do {
 			System.out.println("\nMovimentações na Conta");
@@ -132,14 +132,14 @@ public class MenuInterativo {
 					valor = sc.nextDouble();
 					if (valor < c.getSaldo() + c.getTaxSaque()) {
 						c.sacar(valor);
-						// Thread.sleep(500);
+						Thread.sleep(500);
 						System.out.println("Saque de R$" + valor + " realizado com sucesso!\n");
 						System.out.println("Seu novo saldo é: R$" + c.getSaldo());
 					} else {
 						System.out.println("Saldo insuficiente!\n");
 						System.out.println("Seu saldo atual é de: R$" + c.getSaldo());
 					}
-					// Thread.sleep(2000);
+					Thread.sleep(2000);
 				} catch (InputMismatchException error) {
 					System.out.println("O valor deve ser um número real");
 				}
@@ -149,7 +149,7 @@ public class MenuInterativo {
 				valor = sc.nextDouble();
 				if (valor > 0) {
 					c.depositar(valor);
-					// Thread.sleep(500);
+					Thread.sleep(500);
 					System.out.println("Depósito de R$" + valor + " realizado com sucesso!\n");
 					System.out.println("Seu novo saldo é: R$" + c.getSaldo());
 				} else {
@@ -189,7 +189,7 @@ public class MenuInterativo {
 		} while (opcao != 4);
 	}
 
-	public static void relatorios(Conta c) {
+	public static void relatorios(Conta c) throws InterruptedException {
 		int opcao2;
 		do {
 			System.out.println("\nRelatórios");
@@ -203,7 +203,7 @@ public class MenuInterativo {
 			switch (opcao2) {
 			case 1:
 				System.out.println("\n\nSaldo em conta: " + c.getSaldo() + "\n\n");
-				// Thread.sleep(2000);
+				Thread.sleep(2000);
 				break;
 			case 2:  
 				//RelContaCorrente.relatorioCC(c);
