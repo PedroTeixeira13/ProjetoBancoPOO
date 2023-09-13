@@ -7,6 +7,7 @@ import java.util.Scanner;
 import contas.Conta;
 import enums.PessoaE;
 import movimentacoes.Operacoes;
+import pessoas.Gerente;
 import pessoas.Pessoa;
 import relatorios.RelContaCorrente;
 import relatorios.RelContaPoupanca;
@@ -15,7 +16,7 @@ public class MenuInterativo {
 	static double valor;
 	static Scanner sc = new Scanner(System.in);
 	static int opcao;
-	public static void menu(List<Pessoa> listaPessoa, List<Conta> listaConta) throws Exception {
+	public static void menu(List<Pessoa> listaPessoa, List<Conta> listaConta, int[]totalAg) throws Exception {
 		Locale.setDefault(Locale.US);
 		String cpf;
 		Pessoa p = null, p1 = null;
@@ -48,8 +49,7 @@ public class MenuInterativo {
 						menuCliente(listaPessoa, p, c, listaConta);
 					}
 					else if (p.getCargo().equals(PessoaE.Gerente.name())) {
-						// menuGerente(listaPessoa,p,c,listaConta)
-						// d. Relatório do número contas na mesma agência em que este gerente trabalha
+						menuGerente(listaPessoa,p,c,listaConta, totalAg);
 					}
 					else if (p.getCargo().equals(PessoaE.Diretor.name())) {
 						// menuDiretor(listaPessoa,p,c,listaConta)
@@ -66,7 +66,7 @@ public class MenuInterativo {
 
 		} catch (NullPointerException error) {
 			System.out.println("Credenciais nao encontradas");
-			menu(listaPessoa, listaConta);
+			menu(listaPessoa, listaConta, totalAg);
 		}
 	}
 
@@ -90,7 +90,32 @@ public class MenuInterativo {
 
 		} while (opcao != 3);
 	}
-
+		
+	public static void menuGerente(List<Pessoa> listaPessoa, Pessoa p, Conta c, List<Conta> listaConta, int[]totalAg) throws Exception {
+	    Locale.setDefault(Locale.US);
+	    do {
+	        System.out.print("\nBem-vindo ao Serra Bank!\n");
+	        System.out.println("1 - Movimentações na Conta");
+	        System.out.println("2 - Relatórios");
+	        System.out.println("3 - Relatórios gerenciais");
+	        System.out.println("4 - Sair");
+	        System.out.print("Escolha uma opção: ");
+	        opcao = sc.nextInt();
+	        switch (opcao) {
+	        case 1:
+	            movimentacoesConta(c, listaConta);
+	            break;
+	        case 2:
+	            relatorios(c);
+	            break;
+	        case 3:
+	            Operacoes.agenciaOP(c, totalAg);
+	            break;
+	        }
+	        
+	    } while (opcao != 3);
+	}
+	
 	public static void movimentacoesConta(Conta c, List<Conta> listaConta) throws InterruptedException {
 		Locale.setDefault(Locale.US);
 		do {

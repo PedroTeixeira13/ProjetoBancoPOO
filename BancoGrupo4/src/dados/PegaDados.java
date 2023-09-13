@@ -34,7 +34,7 @@ public class PegaDados {
                     Diretor d = new Diretor(divide[0], divide[1], divide[2], divide[3]);
                     listaPessoa.add(d);
                 } else if(divide[2].equals(PessoaE.Gerente.name())) {
-                    Gerente g = new Gerente(divide[0], divide[1], divide[2], divide[3], Integer.parseInt(divide[4]));
+                    Gerente g = new Gerente(divide[0], divide[1], divide[2], divide[3]);
                     listaPessoa.add(g);
                 } else if(divide[2].equals(PessoaE.Presidente.name())) {
                     Presidente p = new Presidente(divide[0], divide[1], divide[2], divide[3]);
@@ -50,11 +50,13 @@ public class PegaDados {
         buffRead.close();
     }
 
-    public static void leConta(String caminho, List<Conta> listaConta) throws Exception {
+    public static void leConta(String caminho, List<Conta> listaConta, int[]totalAg) throws Exception {
 
     	BufferedReader buffRead = new BufferedReader(new FileReader(caminho));
 
         String linha = "";
+        int total1 = 0;
+        int total2 = 0;
 
         while (true) {
         	linha = buffRead.readLine();
@@ -69,9 +71,16 @@ public class PegaDados {
                     ContaPoupanca cp = new ContaPoupanca(divide[0], Double.parseDouble(divide[1]), Integer.parseInt(divide[2]), divide[3]);
                     listaConta.add(cp);
                 }
+                if(divide[2].equals("0001")) {
+                	total1++;
+                }else if(divide[2].equals("0002")) {
+                	total2++;
+                }
             } else {
                 break;
             }
+            totalAg[0] = total1;
+            totalAg[1] = total2;
         }
         buffRead.close();
     }

@@ -1,10 +1,12 @@
 package movimentacoes;
 
+import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
 import contas.Conta;
+import pessoas.Gerente;
 
 public class Operacoes {
 	static Scanner sc = new Scanner(System.in);
@@ -87,6 +89,16 @@ public class Operacoes {
 			}
 		}catch(InputMismatchException error){
 			System.out.println("O valor deve ser um número real");
+		}
+	}
+	
+	public static void agenciaOP(Conta c, int[]totalAg) throws IOException {
+		if(c.getAgencia() == (0001)) {
+			System.out.println("Você gere " + totalAg[0] + " contas ");
+		}else if(c.getAgencia() == 0002){
+			System.out.println("Você gere " + totalAg[1] + " contas ");
+		}else {
+			System.out.println("Número da agência da sua conta é invalido. ");
 		}
 	}
 }
