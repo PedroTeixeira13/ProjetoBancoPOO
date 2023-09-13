@@ -3,12 +3,14 @@ package menu;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Locale;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import contas.Conta;
 import enums.PessoaE;
 import pessoas.Pessoa;
 import relatorios.RelContaCorrente;
+import relatorios.RelContaPoupanca;
 
 public class MenuInterativo {
 	static Scanner sc = new Scanner(System.in);
@@ -209,12 +211,12 @@ public class MenuInterativo {
 				RelContaCorrente.relatorioCC(c);
 				break;
 			case 3:
-				System.out.println("Digite o valor: ");
-				valor = sc.nextDouble();
-				System.out.println("Digite a quantidade de dias: ");
-				int dias = sc.nextInt();
-				double total = valor * dias * 0.003;
-				System.out.println("Seu rendimento em " + dias + " será: R$" + total);
+				try {
+					RelContaPoupanca.relatorioCP(c);
+				}catch(NoSuchElementException NSEError) {
+					System.out.println("Não existe elemento ");
+				}
+				
 				break;
 			case 4: // Desafio seguro de vida
 				break;
