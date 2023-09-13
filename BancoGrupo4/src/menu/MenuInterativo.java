@@ -139,7 +139,8 @@ public class MenuInterativo {
 			case 3:
 				RelContaPoupanca.relatorioCP(c);
 				break;
-			case 4: // Desafio seguro de vida
+			case 4: 
+				Operacoes.seguroOP(c);
 				break;
 			}
 

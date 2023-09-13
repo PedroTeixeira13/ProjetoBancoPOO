@@ -70,5 +70,23 @@ public class Operacoes {
 			System.out.println("Saldo insuficiente ou valor mínimo para transferência não atingido\n");
 			System.out.println("Seu saldo atual é de: R$" + c.getSaldo());
 		}
+	} 
+
+	public static void seguroOP (Conta c)throws Exception {
+		try{
+			System.out.println("Qual valor você quer assegurar:");
+			double valor = sc.nextDouble();
+			if (c.getSaldo() >= (valor * c.getTaxaSeguro())){
+				c.seguro(valor);
+				System.out.println("R$"+ valor + " assegurados com sucesso!");
+				System.out.println("Seu saldo atual é de: R$" + c.getSaldo());
+				Thread.sleep(500);
+			}else{
+				System.out.println("Saldo insuficiente!");
+				System.out.println("Seu saldo atual é de: R$" + c.getSaldo());
+			}
+		}catch(InputMismatchException error){
+			System.out.println("O valor deve ser um número real");
+		}
 	}
 }

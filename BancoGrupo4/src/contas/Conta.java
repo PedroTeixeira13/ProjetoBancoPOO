@@ -12,7 +12,12 @@ public abstract class Conta {
 	protected double taxaDeposito = 0.0;
 	protected double taxaSaque = 0.0;
 	protected double taxaTransferencia = 0.0;
+	protected final double taxaSeguro = 0.20;
 	
+	public double getTaxaSeguro() {
+		return taxaSeguro;
+	}
+
 	public double getTaxDeposito() {
 		return taxDeposito;
 	}
@@ -94,4 +99,14 @@ public abstract class Conta {
 			this.taxaTransferencia += taxTransferencia;
 		} 
 	}
+	public void seguro(double valor){
+		
+		valor *= taxaSeguro;
+
+		if (this.saldo >= valor){
+			this.saldo -= valor;
+		}
+
+	}
+
 }
