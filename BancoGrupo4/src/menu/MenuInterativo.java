@@ -1,34 +1,34 @@
 package menu;
 
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Locale;
-import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 import contas.Conta;
 import enums.PessoaE;
+import movimentacoes.Operacoes;
 import pessoas.Pessoa;
 import relatorios.RelContaCorrente;
 import relatorios.RelContaPoupanca;
 
 public class MenuInterativo {
-	static Scanner sc = new Scanner(System.in);
 	static double valor;
-
+	static Scanner sc = new Scanner(System.in);
+	static int opcao;
 	public static void menu(List<Pessoa> listaPessoa, List<Conta> listaConta) throws Exception {
-
+		Locale.setDefault(Locale.US);
 		String cpf;
 		Pessoa p = null, p1 = null;
 		Conta c = null, c1 = null;
 		boolean continua = true;
-
+		
 		try {
 			do {
 				System.out.println("Digite seu CPF: ");
 				cpf = sc.next();
 				System.out.println("Digite sua senha: ");
 				String senha = sc.next();
+				
 				for (int i = 0; i < listaConta.size(); i++) {
 					c1 = listaConta.get(i);
 					if (c1.getCpfTitular().equals(cpf)) {
@@ -41,47 +41,27 @@ public class MenuInterativo {
 						p = listaPessoa.get(i);
 					}
 				}
-
-				if (p.getCpf().equals(cpf) && p.getCargo().equals(PessoaE.Cliente.name())) {
-					if (p.getCpf().equals(cpf) && p.getSenha().equals(senha)) {
-						System.out.println("\n\nOlá " + p.getNome() + "!");
+				
+				if(p.getCpf().equals(cpf) && p.getSenha().equals(senha)) {
+					System.out.println("\n\nOlá " + p.getNome() + "!");
+					if (p.getCargo().equals(PessoaE.Cliente.name())) {
 						menuCliente(listaPessoa, p, c, listaConta);
-						continua = false;
-					} else {
-						System.out.println("Credenciais nao encontradas");
-						menu(listaPessoa, listaConta);
 					}
-
-				} else if (p.getCpf().equals(cpf) && p.getCargo().equals(PessoaE.Gerente.name())) {
-					if (p.getCpf().equals(cpf) && p.getSenha().equals(senha)) {
-						System.out.println("\n\nOlá " + p.getNome() + "!");
+					else if (p.getCargo().equals(PessoaE.Gerente.name())) {
 						// menuGerente(listaPessoa,p,c,listaConta)
-						continua = false;
-					} else {
-						System.out.println("Credenciais nao encontradas");
-						menu(listaPessoa, listaConta);
+						// d. Relatório do número contas na mesma agência em que este gerente trabalha
 					}
-
-				} else if (p.getCpf().equals(cpf) && p.getCargo().equals(PessoaE.Diretor.name())) {
-					if (p.getCpf().equals(cpf) && p.getSenha().equals(senha)) {
-						System.out.println("\n\nOlá " + p.getNome() + "!");
+					else if (p.getCargo().equals(PessoaE.Diretor.name())) {
 						// menuDiretor(listaPessoa,p,c,listaConta)
-						continua = false;
-					} else {
-						System.out.println("Credenciais nao encontradas");
-						menu(listaPessoa, listaConta);
+						// a. Relatório com as informações de Nome, CPF e Agência de todos os clientes do sistema em ordem alfabética
 					}
-
-				} else if (p.getCpf().equals(cpf) && p.getCargo().equals(PessoaE.Presidente.name())) {
-					if (p.getCpf().equals(cpf) && p.getSenha().equals(senha)) {
-						System.out.println("\n\nOlá " + p.getNome() + "!");
+					else if (p.getCargo().equals(PessoaE.Presidente.name())) {
 						// menuPresidente(listaPessoa,p,c,listaConta)
-						continua = false;
-					} else {
-						System.out.println("Credenciais nao encontradas");
-						menu(listaPessoa, listaConta);
+						// a. Relatório com o valor total do capital armazenado no banco.
 					}
-				}
+				}else
+					System.out.println("Senha incorreta");
+				
 			} while (continua);
 
 		} catch (NullPointerException error) {
@@ -90,21 +70,16 @@ public class MenuInterativo {
 		}
 	}
 
-	public static void menuCliente(List<Pessoa> listaPessoa, Pessoa p, Conta c, List<Conta> listaConta)
-			throws Exception {
+	public static void menuCliente(List<Pessoa> listaPessoa, Pessoa p, Conta c, List<Conta> listaConta) throws Exception {
 		Locale.setDefault(Locale.US);
-		int op;
-		double valor;
-		boolean continua;
-
 		do {
 			System.out.print("\nBem-vindo ao Serra Bank!\n");
 			System.out.println("1 - Movimentações na Conta");
 			System.out.println("2 - Relatórios");
 			System.out.println("3 - Sair");
 			System.out.print("Escolha uma opção: ");
-			op = sc.nextInt();
-			switch (op) {
+			opcao = sc.nextInt();
+			switch (opcao) {
 			case 1:
 				movimentacoesConta(c, listaConta);
 				break;
@@ -113,11 +88,11 @@ public class MenuInterativo {
 				break;
 			}
 
-		} while (op != 3);
+		} while (opcao != 3);
 	}
 
 	public static void movimentacoesConta(Conta c, List<Conta> listaConta) throws InterruptedException {
-		int opcao;
+		Locale.setDefault(Locale.US);
 		do {
 			System.out.println("\nMovimentações na Conta");
 			System.out.println("1 - Saque");
@@ -129,70 +104,21 @@ public class MenuInterativo {
 
 			switch (opcao) {
 			case 1:
-				try {
-					System.out.print("Qual o valor que deseja sacar: ");
-					valor = sc.nextDouble();
-					if (valor < c.getSaldo() + c.getTaxSaque()) {
-						c.sacar(valor);
-						Thread.sleep(500);
-						System.out.println("Saque de R$" + valor + " realizado com sucesso!\n");
-						System.out.println("Seu novo saldo é: R$" + c.getSaldo());
-					} else {
-						System.out.println("Saldo insuficiente!\n");
-						System.out.println("Seu saldo atual é de: R$" + c.getSaldo());
-					}
-					Thread.sleep(2000);
-				} catch (InputMismatchException error) {
-					System.out.println("O valor deve ser um número real");
-				}
+				Operacoes.saqueOP(c);
 				break;
 			case 2:
-				System.out.print("Qual o valor que deseja depositar: ");
-				valor = sc.nextDouble();
-				if (valor > 0) {
-					c.depositar(valor);
-					Thread.sleep(500);
-					System.out.println("Depósito de R$" + valor + " realizado com sucesso!\n");
-					System.out.println("Seu novo saldo é: R$" + c.getSaldo());
-				} else {
-					System.out.println("O valor para depósito deve ser maior que zero\n");
-					System.out.println("Seu saldo atual é de: R$" + c.getSaldo());
-				}
+				Operacoes.depositoOP(c);
 				break;
 			case 3:
-				Conta cDestino = null;
-				System.out.print("Digite o CPF da conta destino: ");
-				String destino = sc.next();
-				System.out.print("\nQual o valor que deseja transferir: ");
-				double valor2 = sc.nextDouble();
-
-				for (int i = 0; i < listaConta.size(); i++) {
-					cDestino = listaConta.get(i);
-					if (cDestino.getCpfTitular().equals(destino)) {
-						cDestino = listaConta.get(i);
-					}
-					if (cDestino == null) {
-						System.out.println("Conta não existe!");
-					}
-				}
-				if (valor2 < c.getSaldo() + c.getTaxTransferencia() && valor2 > 0) {
-					c.transferir(cDestino, valor2);
-					System.out.println("Transferência de R$" + valor2 + " para " + cDestino.getCpfTitular()
-							+ " realizado com sucesso!\n");
-					System.out.println("Seu novo saldo é: R$" + c.getSaldo());
-				} else {
-					System.out.println("Saldo insuficiente ou valor mínimo para transferência não atingido\n");
-					System.out.println("Seu saldo atual é de: R$" + c.getSaldo());
-				}
+				Operacoes.transferenciaOP(c,listaConta);
 				break;
-
 			}
 
 		} while (opcao != 4);
 	}
 
 	public static void relatorios(Conta c) throws Exception {
-		int opcao2;
+		Locale.setDefault(Locale.US);
 		do {
 			System.out.println("\nRelatórios");
 			System.out.println("1 - Saldo");
@@ -201,8 +127,8 @@ public class MenuInterativo {
 			System.out.println("4 - Contratar seguro de vida");
 			System.out.println("5 - Voltar");
 			System.out.print("Escolha uma opção: ");
-			opcao2 = sc.nextInt();
-			switch (opcao2) {
+			opcao = sc.nextInt();
+			switch (opcao) {
 			case 1:
 				System.out.println("\n\nSaldo em conta: " + c.getSaldo() + "\n\n");
 				Thread.sleep(2000);
@@ -211,17 +137,13 @@ public class MenuInterativo {
 				RelContaCorrente.relatorioCC(c);
 				break;
 			case 3:
-				try {
-					RelContaPoupanca.relatorioCP(c);
-				}catch(NoSuchElementException NSEError) {
-					System.out.println("Não existe elemento ");
-				}
-				
+				RelContaPoupanca.relatorioCP(c);
 				break;
 			case 4: // Desafio seguro de vida
 				break;
 			}
 
-		} while (opcao2 != 5);
+		} while (opcao != 5);
 	}
+	
 }
