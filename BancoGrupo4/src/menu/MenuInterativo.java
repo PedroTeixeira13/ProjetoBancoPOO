@@ -7,10 +7,10 @@ import java.util.Scanner;
 import contas.Conta;
 import enums.PessoaE;
 import movimentacoes.Operacoes;
-import pessoas.Gerente;
 import pessoas.Pessoa;
 import relatorios.RelContaCorrente;
 import relatorios.RelContaPoupanca;
+import relatorios.RelatorioPresidente;
 
 public class MenuInterativo {
 	static double valor;
@@ -56,8 +56,7 @@ public class MenuInterativo {
 						// a. Relatório com as informações de Nome, CPF e Agência de todos os clientes do sistema em ordem alfabética
 					}
 					else if (p.getCargo().equals(PessoaE.Presidente.name())) {
-						// menuPresidente(listaPessoa,p,c,listaConta)
-						// a. Relatório com o valor total do capital armazenado no banco.
+						menuPresidente(listaPessoa, p,c,listaConta);
 					}
 				}else
 					System.out.println("Senha incorreta");
@@ -115,6 +114,31 @@ public class MenuInterativo {
 	        
 	    } while (opcao != 3);
 	}
+	
+	   public static void menuPresidente(List<Pessoa> listaPessoa, Pessoa p, Conta c, List<Conta> listaConta) throws Exception {
+	        Locale.setDefault(Locale.US);
+	        do {
+	            System.out.print("\nBem-vindo ao Serra Bank!\n");
+	            System.out.println("1 - Movimentações na Conta");
+	            System.out.println("2 - Relatórios");
+	            System.out.println("3 - Relatórios presidenciais");
+	            System.out.println("4 - Sair");
+	            System.out.print("Escolha uma opção: ");
+	            opcao = sc.nextInt();
+	            switch (opcao) {
+	            case 1:
+	                movimentacoesConta(c, listaConta);
+	                break;
+	            case 2:
+	                relatorios(c);
+	                break;
+	            case 3:
+	                RelatorioPresidente.informacaoCliente(c, listaConta);
+	                break;
+	            }
+	            
+	        } while (opcao != 3);
+	    }
 	
 	public static void movimentacoesConta(Conta c, List<Conta> listaConta) throws InterruptedException {
 		Locale.setDefault(Locale.US);
