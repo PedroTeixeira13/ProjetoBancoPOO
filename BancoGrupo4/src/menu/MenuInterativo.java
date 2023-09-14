@@ -8,9 +8,11 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
+
 import contas.Conta;
 import dados.SobrescreveDados;
 import enums.PessoaE;
+import exceptions.CredenciaisNaoEncontradasException;
 import movimentacoes.Operacoes;
 import pessoas.Pessoa;
 import relatorios.RelContaCorrente;
@@ -33,11 +35,13 @@ public class MenuInterativo {
 
 		try {
 			do {
-				System.out.println("Digite seu CPF: ");
+				System.out.println("----Login----\n");
+				System.out.print("Digite seu CPF: ");
 				cpf = sc.next();
-				System.out.println("Digite sua senha: ");
+				System.out.print("Digite sua senha: ");
 				senha = sc.next();
-
+				System.out.println("\n-------------\n");
+				Thread.sleep(700);
 				for (int i = 0; i < listaConta.size(); i++) {
 					c1 = listaConta.get(i);
 					if (c1.getCpfTitular().equals(cpf)) {
@@ -52,7 +56,10 @@ public class MenuInterativo {
 				}
 
 				if (p.getCpf().equals(cpf) && p.getSenha().equals(senha)) {
-					System.out.println("\n\nOlá " + p.getNome() + "!");
+					System.out.println("Logado como "+ p.getCargo());
+					Thread.sleep(700);
+					System.out.print("\n-------------\n");
+					System.out.println("\nSeja Bem vindo " + p.getNome() + "!\n");
 					if (p.getCargo().equals(PessoaE.Cliente.name())) {
 						menuCliente(listaPessoa, p, c, listaConta);
 					} else if (p.getCargo().equals(PessoaE.Gerente.name())) {
@@ -62,13 +69,15 @@ public class MenuInterativo {
 					} else if (p.getCargo().equals(PessoaE.Presidente.name())) {
 						menuPresidente(listaPessoa, p, c, listaConta);
 					}
-				} else
+				} else {
 					System.out.println("Senha incorreta");
-
+				}
+				
+				continua = false;
 			} while (continua);
+			
 		} catch (NullPointerException error) {
-			System.out.println("credenciais invalidas");
-			menu(listaPessoa, listaConta, totalAg);
+			throw new CredenciaisNaoEncontradasException(listaPessoa, listaConta, totalAg);
 		}
 	}
 
@@ -77,11 +86,11 @@ public class MenuInterativo {
 		Locale.setDefault(Locale.US);
 		int opcao = 0;
 		do {
-			System.out.print("\nBem-vindo ao Serra Bank!\n");
+			Thread.sleep(700);
+			System.out.print("-------------\n");
 			System.out.println("1 - Movimentações na Conta");
 			System.out.println("2 - Relatórios");
-			System.out.println("3 - Imprime relatório");
-			System.out.println("4 - Sair");
+			System.out.println("3 - Sair");
 			System.out.print("Escolha uma opção: ");
 			opcao = sc.nextInt();
 			switch (opcao) {
@@ -93,10 +102,14 @@ public class MenuInterativo {
 					break;
 				case 3:
 					imprimeExtrato(extrato, c.getCpfTitular());
+					Menu.sair();
+					break;
+				default:
+					System.out.println("Opcão inválida, tente novamente!");
 					break;
 			}
 
-		} while (opcao != 4);
+		} while (opcao != 3);
 		SobrescreveDados.sobrescrita(listaConta, listaPessoa);
 	}
 
@@ -105,7 +118,8 @@ public class MenuInterativo {
 		Locale.setDefault(Locale.US);
 		int opcao = 0;
 		do {
-			System.out.print("\nBem-vindo ao Serra Bank!\n");
+			Thread.sleep(700);
+			System.out.print("-------------\n");
 			System.out.println("1 - Movimentações na Conta");
 			System.out.println("2 - Relatórios");
 			System.out.println("3 - Relatórios gerenciais");
@@ -122,9 +136,15 @@ public class MenuInterativo {
 				case 3:
 					Operacoes.agenciaOP(c, totalAg);
 					break;
+				case 4:
+					Menu.sair();
+					break;
+				default:
+					System.out.println("Opcão inválida, tente novamente!");
+					break;
 			}
 
-		} while (opcao != 3);
+		} while (opcao != 4);
 		SobrescreveDados.sobrescrita(listaConta, listaPessoa);
 	}
 
@@ -133,7 +153,8 @@ public class MenuInterativo {
 		Locale.setDefault(Locale.US);
 		int opcao = 0;
 		do {
-			System.out.print("\nBem-vindo ao Serra Bank!\n");
+			Thread.sleep(700);
+			System.out.print("-------------\n");
 			System.out.println("1 - Movimentações na Conta");
 			System.out.println("2 - Relatórios");
 			System.out.println("3 - Relatório diretoria");
@@ -150,9 +171,14 @@ public class MenuInterativo {
 				case 3:
 					RelatorioDiretor.infoCliente(listaConta, listaPessoa);
 					break;
+				case 4:
+					Menu.sair();
+					break;
+				default:
+					System.out.println("Opcão inválida, tente novamente!");
+					break;
 			}
-
-		} while (opcao != 3);
+		} while (opcao != 4);
 		SobrescreveDados.sobrescrita(listaConta, listaPessoa);
 	}
 
@@ -161,7 +187,8 @@ public class MenuInterativo {
 		Locale.setDefault(Locale.US);
 		int opcao = 0;
 		do {
-			System.out.print("\nBem-vindo ao Serra Bank!\n");
+			Thread.sleep(700);
+			System.out.print("-------------\n");
 			System.out.println("1 - Movimentações na Conta");
 			System.out.println("2 - Relatórios");
 			System.out.println("3 - Relatórios presidenciais");
@@ -178,9 +205,14 @@ public class MenuInterativo {
 				case 3:
 					RelatorioPresidente.informacaoCliente(c, listaConta);
 					break;
+				case 4:
+					Menu.sair();
+					break;
+				default:
+					System.out.println("Opcão inválida, tente novamente!");
+					break;
 			}
-
-		} while (opcao != 3);
+		} while (opcao != 4);
 		SobrescreveDados.sobrescrita(listaConta, listaPessoa);
 	}
 
@@ -188,6 +220,8 @@ public class MenuInterativo {
 		Locale.setDefault(Locale.US);
 		int opcao = 0;
 		do {
+			Thread.sleep(700);
+			System.out.print("-------------\n");
 			System.out.println("\nMovimentações na Conta");
 			System.out.println("1 - Saque");
 			System.out.println("2 - Depósito");
@@ -209,6 +243,14 @@ public class MenuInterativo {
 					extrato += Operacoes.transferenciaOP(c, listaConta);
 					SobrescreveDados.sobrescrita(listaConta, listaPessoa);
 					break;
+				case 4:
+					System.out.print("\n-------------\n");
+					System.out.println("Voltando...");
+					Thread.sleep(600);
+					break;
+				default:
+					System.out.println("Opcão inválida, tente novamente!");
+					break;
 			}
 
 		} while (opcao != 4);
@@ -226,6 +268,8 @@ public class MenuInterativo {
 		Locale.setDefault(Locale.US);
 		int opcao = 0;
 		do {
+			Thread.sleep(700);
+			System.out.print("-------------\n");
 			System.out.println("\nRelatórios");
 			System.out.println("1 - Saldo");
 			System.out.println("2 - Relatório de tributação da conta corrente");
@@ -237,7 +281,7 @@ public class MenuInterativo {
 			switch (opcao) {
 				case 1:
 					System.out.println("\n\nSaldo em conta: " + c.getSaldo() + "\n\n");
-					Thread.sleep(2000);
+					Thread.sleep(600);
 					break;
 				case 2:
 					RelContaCorrente.relatorioCC(c);
@@ -247,6 +291,14 @@ public class MenuInterativo {
 					break;
 				case 4:
 					Operacoes.seguroOP(c);
+					break;
+				case 5:
+					System.out.print("\n-------------\n");
+					System.out.println("Voltando...");
+					Thread.sleep(600);
+					break;
+				default:
+					System.out.println("Opcão inválida, tente novamente!");
 					break;
 			}
 

@@ -21,6 +21,7 @@ public class Principal {
         totalAg = new int[2];
         
 		Menu.logo();
+		Thread.sleep(600);
         try {
 			PegaDados.leitorPessoa(caminho, listaPessoa);
 			PegaDados.leConta(caminho, listaConta, totalAg);
