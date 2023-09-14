@@ -13,8 +13,8 @@ import pessoas.Pessoa;
 public class Principal {
 	public static void main(String[] args) throws Exception {
 		
-		String caminho = "BancoGrupo4\\src\\dados\\teste.txt";
-		String caminho2 = ".\\src\\dados\\teste.txt";	
+		String caminho = "BancoGrupo4\\src\\dados\\dados.txt";
+		String caminho2 = ".\\src\\dados\\dados.txt";	
 		List<Pessoa> listaPessoa = new ArrayList<>();
         List<Conta> listaConta = new ArrayList<>();
         int[] totalAg;

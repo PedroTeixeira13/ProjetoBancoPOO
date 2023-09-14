@@ -13,8 +13,8 @@ public class SobrescreveDados {
     public static void sobrescrita(List<Conta> listaConta, List<Pessoa> listaPessoa) throws Exception {
 
         
-        String caminho = "BancoGrupo4\\src\\dados\\teste.txt";
-        String caminho2 = ".\\src\\dados\\teste.txt";
+        String caminho = "BancoGrupo4\\src\\dados\\dados.txt";
+        String caminho2 = ".\\src\\dados\\dados.txt";
         
         try {
             buffer(caminho, listaConta, listaPessoa);
@@ -50,7 +50,7 @@ public class SobrescreveDados {
                 String qq = String.format("%.2f", saldo);
                 agencia = listaConta.get(i).getAgencia();
                 tipo = listaConta.get(i).getTipo();
-                String linha = cpf + "," + qq + "," + agencia + "," + tipo;
+                String linha = cpf + "," + qq + "," + "000" + agencia + "," + tipo;
                 bw.append(linha + "\n");
             }
             bw.close();

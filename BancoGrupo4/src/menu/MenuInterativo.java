@@ -1,6 +1,7 @@
 package menu;
 
 import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -56,7 +57,7 @@ public class MenuInterativo {
 				}
 
 				if (p.getCpf().equals(cpf) && p.getSenha().equals(senha)) {
-					System.out.println("Logado como "+ p.getCargo());
+					System.out.println("Logado como " + p.getCargo());
 					Thread.sleep(700);
 					System.out.print("\n-------------\n");
 					System.out.println("\nSeja Bem vindo " + p.getNome() + "!\n");
@@ -72,10 +73,10 @@ public class MenuInterativo {
 				} else {
 					System.out.println("Senha incorreta");
 				}
-				
+
 				continua = false;
 			} while (continua);
-			
+
 		} catch (NullPointerException error) {
 			throw new CredenciaisNaoEncontradasException(listaPessoa, listaConta, totalAg);
 		}
@@ -137,6 +138,7 @@ public class MenuInterativo {
 					Operacoes.agenciaOP(c, totalAg);
 					break;
 				case 4:
+					imprimeExtrato(extrato, c.getCpfTitular());
 					Menu.sair();
 					break;
 				default:
@@ -172,6 +174,7 @@ public class MenuInterativo {
 					RelatorioDiretor.infoCliente(listaConta, listaPessoa);
 					break;
 				case 4:
+					imprimeExtrato(extrato, c.getCpfTitular());
 					Menu.sair();
 					break;
 				default:
@@ -206,6 +209,7 @@ public class MenuInterativo {
 					RelatorioPresidente.informacaoCliente(c, listaConta);
 					break;
 				case 4:
+					imprimeExtrato(extrato, c.getCpfTitular());
 					Menu.sair();
 					break;
 				default:
@@ -256,12 +260,25 @@ public class MenuInterativo {
 		} while (opcao != 4);
 	}
 
-	public static void imprimeExtrato (String extrato, String cpf) throws IOException {
+	public static void imprimeExtrato(String extrato, String cpf) throws IOException, InterruptedException {
 		String dataHoraCompleta = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
 
-		BufferedWriter bw = new BufferedWriter(new FileWriter("src\\relatorios\\extrato"+ cpf + dataHoraCompleta + ".txt"));
-		bw.write(extrato);
-		bw.close();
+		if (extrato.equals("SERRA BANK\n\n")) {
+			Thread.sleep(10);
+		} else {
+			try {
+				BufferedWriter bw = new BufferedWriter(new FileWriter("BancoGrupo4\\src\\relatorios\\extrato" + cpf + dataHoraCompleta + ".txt"));
+				bw.append(extrato);
+				bw.close();
+			} catch (FileNotFoundException FNFError) {
+				BufferedWriter bw = new BufferedWriter(new FileWriter(".\\src\\relatorios\\extrato" + cpf + dataHoraCompleta + ".txt"));
+				bw.append(extrato);
+				bw.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
 	}
 
 	public static void relatorios(Conta c) throws Exception {

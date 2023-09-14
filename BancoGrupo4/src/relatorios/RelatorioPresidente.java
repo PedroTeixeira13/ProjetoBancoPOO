@@ -17,10 +17,19 @@ public class RelatorioPresidente {
 			capital += listaConta.get(i).getSaldo();
 		}
 		texto = "Capital Total no banco R$"+capital;
-		PrintWriter ps = new PrintWriter("src\\relatorios\\relatorioPresidente" + dataHoraCompleta + ".txt");
-        ps.print("SERRA BANK \n\n" + texto);
-        System.out.println("Relátorio gerado com sucesso!\n\n");
-        ps.close();
+		try {
+			PrintWriter ps = new PrintWriter("BancoGrupo4\\src\\relatorios\\relatorioPresidente" + dataHoraCompleta + ".txt");
+			ps.print("SERRA BANK \n\n" + texto);
+			System.out.println("Relátorio gerado com sucesso!\n\n");
+			ps.close();
+		} catch (FileNotFoundException aaaa) {
+			PrintWriter ps = new PrintWriter(".\\src\\relatorios\\relatorioPresidente" + dataHoraCompleta + ".txt");
+			ps.print("SERRA BANK \n\n" + texto);
+			System.out.println("Relátorio gerado com sucesso!\n\n");
+			ps.close();
+		} catch (Exception error) {
+			error.printStackTrace();
+		}
 		
 	}
 
