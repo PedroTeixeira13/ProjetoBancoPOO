@@ -1,10 +1,15 @@
 package menu;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
-
 import contas.Conta;
+import dados.SobrescreveDados;
 import enums.PessoaE;
 import movimentacoes.Operacoes;
 import pessoas.Pessoa;
@@ -16,11 +21,12 @@ import relatorios.RelatorioPresidente;
 public class MenuInterativo {
 	static double valor;
 	static Scanner sc = new Scanner(System.in);
-	static int opcao;
+	static String extrato = "SERRA BANK\n\n";
 
 	public static void menu(List<Pessoa> listaPessoa, List<Conta> listaConta, int[] totalAg) throws Exception {
 		Locale.setDefault(Locale.US);
-		String cpf;
+		String cpf = "";
+		String senha = "";
 		Pessoa p = null, p1 = null;
 		Conta c = null, c1 = null;
 		boolean continua = true;
@@ -30,7 +36,7 @@ public class MenuInterativo {
 				System.out.println("Digite seu CPF: ");
 				cpf = sc.next();
 				System.out.println("Digite sua senha: ");
-				String senha = sc.next();
+				senha = sc.next();
 
 				for (int i = 0; i < listaConta.size(); i++) {
 					c1 = listaConta.get(i);
@@ -60,9 +66,8 @@ public class MenuInterativo {
 					System.out.println("Senha incorreta");
 
 			} while (continua);
-
 		} catch (NullPointerException error) {
-			System.out.println("Credenciais nao encontradas");
+			System.out.println("credenciais invalidas");
 			menu(listaPessoa, listaConta, totalAg);
 		}
 	}
@@ -70,28 +75,35 @@ public class MenuInterativo {
 	public static void menuCliente(List<Pessoa> listaPessoa, Pessoa p, Conta c, List<Conta> listaConta)
 			throws Exception {
 		Locale.setDefault(Locale.US);
+		int opcao = 0;
 		do {
 			System.out.print("\nBem-vindo ao Serra Bank!\n");
 			System.out.println("1 - Movimentações na Conta");
 			System.out.println("2 - Relatórios");
-			System.out.println("3 - Sair");
+			System.out.println("3 - Imprime relatório");
+			System.out.println("4 - Sair");
 			System.out.print("Escolha uma opção: ");
 			opcao = sc.nextInt();
 			switch (opcao) {
 				case 1:
-					movimentacoesConta(c, listaConta);
+					movimentacoesConta(c, listaConta, listaPessoa);
 					break;
 				case 2:
 					relatorios(c);
 					break;
+				case 3:
+					imprimeExtrato(extrato, c.getCpfTitular());
+					break;
 			}
 
-		} while (opcao != 3);
+		} while (opcao != 4);
+		SobrescreveDados.sobrescrita(listaConta, listaPessoa);
 	}
 
 	public static void menuGerente(List<Pessoa> listaPessoa, Pessoa p, Conta c, List<Conta> listaConta, int[] totalAg)
 			throws Exception {
 		Locale.setDefault(Locale.US);
+		int opcao = 0;
 		do {
 			System.out.print("\nBem-vindo ao Serra Bank!\n");
 			System.out.println("1 - Movimentações na Conta");
@@ -102,7 +114,7 @@ public class MenuInterativo {
 			opcao = sc.nextInt();
 			switch (opcao) {
 				case 1:
-					movimentacoesConta(c, listaConta);
+					movimentacoesConta(c, listaConta, listaPessoa);
 					break;
 				case 2:
 					relatorios(c);
@@ -113,11 +125,13 @@ public class MenuInterativo {
 			}
 
 		} while (opcao != 3);
+		SobrescreveDados.sobrescrita(listaConta, listaPessoa);
 	}
 
 	public static void menuDiretor(List<Pessoa> listaPessoa, Pessoa p, Conta c, List<Conta> listaConta)
 			throws Exception {
 		Locale.setDefault(Locale.US);
+		int opcao = 0;
 		do {
 			System.out.print("\nBem-vindo ao Serra Bank!\n");
 			System.out.println("1 - Movimentações na Conta");
@@ -128,7 +142,7 @@ public class MenuInterativo {
 			opcao = sc.nextInt();
 			switch (opcao) {
 				case 1:
-					movimentacoesConta(c, listaConta);
+					movimentacoesConta(c, listaConta, listaPessoa);
 					break;
 				case 2:
 					relatorios(c);
@@ -139,11 +153,13 @@ public class MenuInterativo {
 			}
 
 		} while (opcao != 3);
+		SobrescreveDados.sobrescrita(listaConta, listaPessoa);
 	}
 
 	public static void menuPresidente(List<Pessoa> listaPessoa, Pessoa p, Conta c, List<Conta> listaConta)
 			throws Exception {
 		Locale.setDefault(Locale.US);
+		int opcao = 0;
 		do {
 			System.out.print("\nBem-vindo ao Serra Bank!\n");
 			System.out.println("1 - Movimentações na Conta");
@@ -154,7 +170,7 @@ public class MenuInterativo {
 			opcao = sc.nextInt();
 			switch (opcao) {
 				case 1:
-					movimentacoesConta(c, listaConta);
+					movimentacoesConta(c, listaConta, listaPessoa);
 					break;
 				case 2:
 					relatorios(c);
@@ -165,10 +181,12 @@ public class MenuInterativo {
 			}
 
 		} while (opcao != 3);
+		SobrescreveDados.sobrescrita(listaConta, listaPessoa);
 	}
 
-	public static void movimentacoesConta(Conta c, List<Conta> listaConta) throws InterruptedException {
+	public static void movimentacoesConta(Conta c, List<Conta> listaConta, List<Pessoa> listaPessoa) throws Exception {
 		Locale.setDefault(Locale.US);
+		int opcao = 0;
 		do {
 			System.out.println("\nMovimentações na Conta");
 			System.out.println("1 - Saque");
@@ -180,21 +198,33 @@ public class MenuInterativo {
 
 			switch (opcao) {
 				case 1:
-					Operacoes.saqueOP(c);
+					extrato += Operacoes.saqueOP(c);
+					SobrescreveDados.sobrescrita(listaConta, listaPessoa);
 					break;
 				case 2:
-					Operacoes.depositoOP(c);
+					extrato += Operacoes.depositoOP(c);
+					SobrescreveDados.sobrescrita(listaConta, listaPessoa);
 					break;
 				case 3:
-					Operacoes.transferenciaOP(c, listaConta);
+					extrato += Operacoes.transferenciaOP(c, listaConta);
+					SobrescreveDados.sobrescrita(listaConta, listaPessoa);
 					break;
 			}
 
 		} while (opcao != 4);
 	}
 
+	public static void imprimeExtrato (String extrato, String cpf) throws IOException {
+		String dataHoraCompleta = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
+
+		BufferedWriter bw = new BufferedWriter(new FileWriter("src\\relatorios\\extrato"+ cpf + dataHoraCompleta + ".txt"));
+		bw.write(extrato);
+		bw.close();
+	}
+
 	public static void relatorios(Conta c) throws Exception {
 		Locale.setDefault(Locale.US);
+		int opcao = 0;
 		do {
 			System.out.println("\nRelatórios");
 			System.out.println("1 - Saldo");
@@ -222,5 +252,4 @@ public class MenuInterativo {
 
 		} while (opcao != 5);
 	}
-
 }

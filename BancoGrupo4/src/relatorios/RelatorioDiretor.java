@@ -23,7 +23,7 @@ public class RelatorioDiretor {
 		listaPessoa.sort((p1, p2) -> p1.getNome().compareTo(p2.getNome()));
 
 		String dataHoraCompleta = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
-		System.out.println("Relatório dos Clientes: ");
+		System.out.println("Relatório dos Clientes gerado!");
 		PrintWriter ps = new PrintWriter("src\\relatorios\\relatorioDiretor" + dataHoraCompleta + ".txt");
 		String nome = null, cpf = null;
 		int agencia = 0;

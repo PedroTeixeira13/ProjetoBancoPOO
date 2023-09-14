@@ -10,7 +10,7 @@ import contas.Conta;
 public class Operacoes {
 	static Scanner sc = new Scanner(System.in);
 
-	static public void saqueOP(Conta c) throws InterruptedException {
+	static public String saqueOP(Conta c) throws InterruptedException {
 		
 		try {
 			System.out.print("Qual o valor que deseja sacar: ");
@@ -19,18 +19,21 @@ public class Operacoes {
 				c.sacar(valor);
 				Thread.sleep(500);
 				System.out.println("Saque de R$" + valor + " realizado com sucesso!\n");
-				System.out.println("Seu novo saldo é: R$" + c.getSaldo());
+				System.out.printf("Seu novo saldo é de: R$%.2f\n", c.getSaldo());
+				Thread.sleep(2000);
+				return "Saque de " + valor + " realizado.\n";
 			} else {
 				System.out.println("Saldo insuficiente!\n");
-				System.out.println("Seu saldo atual é de: R$" + c.getSaldo());
+				System.out.printf("Seu saldo atual é de: R$%.2f\n", c.getSaldo());
+				return "";
 			}
-			Thread.sleep(2000);
 		} catch (InputMismatchException error) {
 			System.out.println("O valor deve ser um número real");
+			return "";
 		}
 	}
 
-	static public void depositoOP(Conta c) throws InterruptedException {
+	static public String depositoOP(Conta c) throws InterruptedException {
 		
 		System.out.print("Qual o valor que deseja depositar: ");
 		double valor = sc.nextDouble();
@@ -38,15 +41,16 @@ public class Operacoes {
 			c.depositar(valor);
 			Thread.sleep(500);
 			System.out.println("Depósito de R$" + valor + " realizado com sucesso!\n");
-			System.out.println("Seu novo saldo é: R$" + c.getSaldo());
+			System.out.printf("Seu novo saldo é de: R$%.2f\n", c.getSaldo());
+			return "Depósito de " + valor + " realizado!\n";
 		} else {
 			System.out.println("O valor para depósito deve ser maior que zero\n");
-			System.out.println("Seu saldo atual é de: R$" + c.getSaldo());
+			System.out.printf("Seu saldo atual é de: R$%.2f\n", c.getSaldo());
+			return "";
 		}
 	}
 	
-	static public void transferenciaOP(Conta c, List<Conta> listaConta) throws InterruptedException {
-		
+	static public String transferenciaOP(Conta c, List<Conta> listaConta) throws InterruptedException {
 		Conta cDestino = null;
 		System.out.print("Digite o CPF da conta destino: ");
 		String destino = sc.next();
@@ -66,28 +70,33 @@ public class Operacoes {
 			c.transferir(cDestino, valor2);
 			System.out.println("Transferência de R$" + valor2 + " para a conta " + cDestino.getCpfTitular()
 					+ " realizado com sucesso!\n");
-			System.out.println("Seu novo saldo é: R$" + c.getSaldo());
+			System.out.printf("Seu novo saldo é de: R$%.2f\n", c.getSaldo());
+			return "Tranferência de " + valor2 + " para a conta do CPF: " + cDestino.getCpfTitular() + ".\n";
 		} else {
 			System.out.println("Saldo insuficiente ou valor mínimo para transferência não atingido\n");
-			System.out.println("Seu saldo atual é de: R$" + c.getSaldo());
+			System.out.printf("Seu saldo atual é de: R$%.2f\n", c.getSaldo());
+			return "";
 		}
 	} 
 
-	public static void seguroOP (Conta c)throws Exception {
+	public static String seguroOP (Conta c)throws Exception {
 		try{
 			System.out.println("Qual valor você quer assegurar:");
 			double valor = sc.nextDouble();
 			if (c.getSaldo() >= (valor * c.getTaxaSeguro())){
 				c.seguro(valor);
 				System.out.println("R$"+ valor + " assegurados com sucesso!");
-				System.out.println("Seu saldo atual é de: R$" + c.getSaldo());
+				System.out.printf("Seu novo saldo é de: R$%.2f\n", c.getSaldo());
 				Thread.sleep(500);
+				return "Seguro de vida no valor de " + valor + " realizado!\n";
 			}else{
 				System.out.println("Saldo insuficiente!");
-				System.out.println("Seu saldo atual é de: R$" + c.getSaldo());
+				System.out.printf("Seu saldo atual é de: R$%.2f\n", c.getSaldo());
+				return "";
 			}
 		}catch(InputMismatchException error){
 			System.out.println("O valor deve ser um número real");
+			return "";
 		}
 	}
 	
