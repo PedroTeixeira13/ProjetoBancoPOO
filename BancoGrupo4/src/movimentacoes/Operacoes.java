@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Scanner;
 
 import contas.Conta;
-import pessoas.Gerente;
 
 public class Operacoes {
 	static Scanner sc = new Scanner(System.in);
