@@ -60,7 +60,8 @@ public class MenuInterativo {
 					System.out.println("Logado como " + p.getCargo());
 					Thread.sleep(700);
 					System.out.print("\n-------------\n");
-					System.out.println("\nSeja Bem vindo " + p.getNome() + "!\n");
+					System.out.println("\nSeja Bem-vindo(a) " + p.getNome() + "!\n");
+					System.out.print("-------------\n\n\n");
 					if (p.getCargo().equals(PessoaE.Cliente.name())) {
 						menuCliente(listaPessoa, p, c, listaConta);
 					} else if (p.getCargo().equals(PessoaE.Gerente.name())) {
@@ -71,7 +72,8 @@ public class MenuInterativo {
 						menuPresidente(listaPessoa, p, c, listaConta);
 					}
 				} else {
-					System.out.println("Senha incorreta");
+					System.out.println("Senha incorreta, tente novamemente!");
+					menu(listaPessoa, listaConta, totalAg);
 				}
 
 				continua = false;
@@ -88,12 +90,14 @@ public class MenuInterativo {
 		int opcao = 0;
 		do {
 			Thread.sleep(700);
+			System.out.println("Menu Inicial");
 			System.out.print("-------------\n");
 			System.out.println("1 - Movimentações na Conta");
 			System.out.println("2 - Relatórios");
 			System.out.println("3 - Sair");
 			System.out.print("Escolha uma opção: ");
 			opcao = sc.nextInt();
+			System.out.print("-------------\n\n\n");
 			switch (opcao) {
 				case 1:
 					movimentacoesConta(c, listaConta, listaPessoa);
@@ -120,6 +124,7 @@ public class MenuInterativo {
 		int opcao = 0;
 		do {
 			Thread.sleep(700);
+			System.out.println("Menu Inicial");
 			System.out.print("-------------\n");
 			System.out.println("1 - Movimentações na Conta");
 			System.out.println("2 - Relatórios");
@@ -127,6 +132,7 @@ public class MenuInterativo {
 			System.out.println("4 - Sair");
 			System.out.print("Escolha uma opção: ");
 			opcao = sc.nextInt();
+			System.out.print("-------------\n\n\n");
 			switch (opcao) {
 				case 1:
 					movimentacoesConta(c, listaConta, listaPessoa);
@@ -156,6 +162,7 @@ public class MenuInterativo {
 		int opcao = 0;
 		do {
 			Thread.sleep(700);
+			System.out.println("Menu Inicial");
 			System.out.print("-------------\n");
 			System.out.println("1 - Movimentações na Conta");
 			System.out.println("2 - Relatórios");
@@ -163,6 +170,7 @@ public class MenuInterativo {
 			System.out.println("4 - Sair");
 			System.out.print("Escolha uma opção: ");
 			opcao = sc.nextInt();
+			System.out.print("-------------\n\n\n");
 			switch (opcao) {
 				case 1:
 					movimentacoesConta(c, listaConta, listaPessoa);
@@ -191,6 +199,7 @@ public class MenuInterativo {
 		int opcao = 0;
 		do {
 			Thread.sleep(700);
+			System.out.println("Menu Inicial");
 			System.out.print("-------------\n");
 			System.out.println("1 - Movimentações na Conta");
 			System.out.println("2 - Relatórios");
@@ -198,6 +207,7 @@ public class MenuInterativo {
 			System.out.println("4 - Sair");
 			System.out.print("Escolha uma opção: ");
 			opcao = sc.nextInt();
+			System.out.print("-------------\n\n\n");
 			switch (opcao) {
 				case 1:
 					movimentacoesConta(c, listaConta, listaPessoa);
@@ -225,15 +235,15 @@ public class MenuInterativo {
 		int opcao = 0;
 		do {
 			Thread.sleep(700);
-			System.out.print("-------------\n");
 			System.out.println("\nMovimentações na Conta");
+			System.out.print("-------------\n");
 			System.out.println("1 - Saque");
 			System.out.println("2 - Depósito");
 			System.out.println("3 - Transferência para outra conta");
 			System.out.println("4 - Voltar");
 			System.out.print("Escolha uma opção: ");
 			opcao = sc.nextInt();
-
+			System.out.print("-------------\n\n\n");
 			switch (opcao) {
 				case 1:
 					extrato += Operacoes.saqueOP(c);
@@ -250,6 +260,7 @@ public class MenuInterativo {
 				case 4:
 					System.out.print("\n-------------\n");
 					System.out.println("Voltando...");
+					System.out.print("-------------\n\n\n");
 					Thread.sleep(600);
 					break;
 				default:
@@ -286,8 +297,8 @@ public class MenuInterativo {
 		int opcao = 0;
 		do {
 			Thread.sleep(700);
+			System.out.println("Relatórios");
 			System.out.print("-------------\n");
-			System.out.println("\nRelatórios");
 			System.out.println("1 - Saldo");
 			System.out.println("2 - Relatório de tributação da conta corrente");
 			System.out.println("3 - Relatório de Rendimento da poupança");
@@ -295,6 +306,7 @@ public class MenuInterativo {
 			System.out.println("5 - Voltar");
 			System.out.print("Escolha uma opção: ");
 			opcao = sc.nextInt();
+			System.out.print("-------------\n");
 			switch (opcao) {
 				case 1:
 					System.out.println("\n\nSaldo em conta: " + c.getSaldo() + "\n\n");
@@ -312,6 +324,7 @@ public class MenuInterativo {
 				case 5:
 					System.out.print("\n-------------\n");
 					System.out.println("Voltando...");
+					System.out.print("-------------\n\n\n");
 					Thread.sleep(600);
 					break;
 				default:

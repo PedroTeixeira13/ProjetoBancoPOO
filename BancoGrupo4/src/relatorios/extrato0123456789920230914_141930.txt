@@ -1,5 +1,0 @@
-SERRA BANK
-
-Saque de R$2000.0 realizado com sucesso!
-Depósito de R$3000.0 realizado com sucesso!
-Tranferência de 10.0 para a conta do CPF: 12345678910.
