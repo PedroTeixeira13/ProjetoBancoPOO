@@ -11,12 +11,12 @@ import menu.MenuInterativo;
 import pessoas.Pessoa;
 
 public class Principal {
+	static List<Pessoa> listaPessoa = new ArrayList<>();	static List<Conta> listaConta = new ArrayList<>();
+	
 	public static void main(String[] args) throws Exception {
 		
 		String caminho = "BancoGrupo4\\src\\dados\\teste.txt";
 		String caminho2 = ".\\src\\dados\\teste.txt";	
-		List<Pessoa> listaPessoa = new ArrayList<>();
-        List<Conta> listaConta = new ArrayList<>();
         int[] totalAg;
         totalAg = new int[2];
         

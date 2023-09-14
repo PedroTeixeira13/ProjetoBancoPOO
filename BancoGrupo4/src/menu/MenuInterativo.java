@@ -10,6 +10,7 @@ import movimentacoes.Operacoes;
 import pessoas.Pessoa;
 import relatorios.RelContaCorrente;
 import relatorios.RelContaPoupanca;
+import relatorios.RelatorioDiretor;
 import relatorios.RelatorioPresidente;
 
 public class MenuInterativo {
@@ -52,8 +53,7 @@ public class MenuInterativo {
 						menuGerente(listaPessoa,p,c,listaConta, totalAg);
 					}
 					else if (p.getCargo().equals(PessoaE.Diretor.name())) {
-						// menuDiretor(listaPessoa,p,c,listaConta)
-						// a. Relatório com as informações de Nome, CPF e Agência de todos os clientes do sistema em ordem alfabética
+						menuDiretor(listaPessoa,p,c,listaConta);
 					}
 					else if (p.getCargo().equals(PessoaE.Presidente.name())) {
 						menuPresidente(listaPessoa, p,c,listaConta);
@@ -114,6 +114,32 @@ public class MenuInterativo {
 	        
 	    } while (opcao != 3);
 	}
+	
+	   public static void menuDiretor(List<Pessoa> listaPessoa, Pessoa p, Conta c, List<Conta> listaConta) throws Exception {
+	        Locale.setDefault(Locale.US);
+	        do {
+	            System.out.print("\nBem-vindo ao Serra Bank!\n");
+	            System.out.println("1 - Movimentações na Conta");
+	            System.out.println("2 - Relatórios");
+	            System.out.println("3 - Relatório diretoria");
+	            System.out.println("4 - Sair");
+	            System.out.print("Escolha uma opção: ");
+	            opcao = sc.nextInt();
+	            switch (opcao) {
+	            case 1:
+	                movimentacoesConta(c, listaConta);
+	                break;
+	            case 2:
+	                relatorios(c);
+	                break;
+	            case 3:
+	                RelatorioDiretor.infoCliente(listaConta, listaPessoa);
+	                break;
+	            }
+	            
+	        } while (opcao != 3);
+	    }
+		  
 	
 	   public static void menuPresidente(List<Pessoa> listaPessoa, Pessoa p, Conta c, List<Conta> listaConta) throws Exception {
 	        Locale.setDefault(Locale.US);
