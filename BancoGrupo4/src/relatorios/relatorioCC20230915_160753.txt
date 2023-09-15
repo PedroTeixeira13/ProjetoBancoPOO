@@ -1,0 +1,5 @@
+Total gasto em operações: 0.0
+
+Total taxação de saque: 0.0
+Total taxação de deposito: 0.0
+Total taxação de transferencia: 0.0

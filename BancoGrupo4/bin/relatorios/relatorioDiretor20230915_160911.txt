@@ -1,0 +1,14 @@
+SERRA BANK 
+
+Nome: Ana, CPF: 78901234567, Agencia: 2
+Nome: Arthur, CPF: 32165498701, Agencia: 2
+Nome: Breno, CPF: 94342488094, Agencia: 2
+Nome: Carlos, CPF: 56789012345, Agencia: 2
+Nome: João, CPF: 45678912345, Agencia: 1
+Nome: Maria, CPF: 98765432101, Agencia: 1
+Nome: Pedro, CPF: 32145698710, Agencia: 1
+Nome: Rafael, CPF: 22499326034, Agencia: 1
+Nome: Rodrigo, CPF: 80064268055, Agencia: 1
+Nome: Sofia, CPF: 89012345678, Agencia: 1
+Nome: Thomas, CPF: 01234567899, Agencia: 2
+Nome: Vitor, CPF: 12345678910, Agencia: 1

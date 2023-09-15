@@ -1,5 +1,6 @@
 package relatorios;
 
+import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -9,12 +10,12 @@ import java.util.Scanner;
 import contas.Conta;
 
 public class RelContaPoupanca {
-	static Scanner sc = new Scanner (System.in);
-	
-	public static void relatorioCP(Conta c) throws InterruptedException {
+	static Scanner sc = new Scanner(System.in);
+
+	public static void relatorioCP(Conta c) throws InterruptedException, FileNotFoundException {
 		Locale.setDefault(Locale.US);
 		String dataHoraCompleta = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
-		
+
 		System.out.println("\nQual valor que pretende simular: ");
 		double valor = sc.nextDouble();
 		System.out.println("Quantos dias pretende simular: ");
@@ -30,13 +31,19 @@ public class RelContaPoupanca {
 		System.out.println("Simulação Completa!\n");
 		Thread.sleep(800);
 		double total = valor * dias * 0.003;
-        try(PrintWriter ps = new PrintWriter("src\\relatorios\\relatorioCP" + dataHoraCompleta + ".txt")){
-        	 System.out.println("Relátorio ContaPoupanca gerado com sucesso!\n\n");
-        	 ps.print("SERRA BANK \n\nTotal da simulação de rendimento: " + total);
-             ps.close();
-        } catch (Exception ex) {
-        	System.out.println("Relatório não foi gerado!!!");
-        }
-       
-    }
+		try {
+			PrintWriter ps = new PrintWriter("src\\relatorios\\relatorioCP" + dataHoraCompleta + ".txt");
+			System.out.println("Relátorio ContaPoupanca gerado com sucesso!\n\n");
+			ps.print("SERRA BANK \n\nTotal da simulação de rendimento: " + total);
+			ps.close();
+		} catch (FileNotFoundException FNFError) {
+			PrintWriter ps = new PrintWriter("BancoGrupo4\\src\\relatorios\\relatorioCP" + dataHoraCompleta + ".txt");
+			System.out.println("Relátorio ContaPoupanca gerado com sucesso!\n\n");
+			ps.print("SERRA BANK \n\nTotal da simulação de rendimento: " + total);
+			ps.close();
+		} catch (Exception ex) {
+			System.out.println("Relatório não foi gerado!!!");
+		}
+
+	}
 }

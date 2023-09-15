@@ -60,7 +60,7 @@ public class MenuInterativo {
 					System.out.println("Logado como " + p.getCargo());
 					Thread.sleep(700);
 					System.out.print("\n-------------\n");
-					System.out.println("\nSeja Bem-vindo(a) " + p.getNome() + "!\n");
+					System.out.println("\nSeja Bem-vindo(a), " + p.getNome() + "!\n");
 					System.out.print("-------------\n\n\n");
 					if (p.getCargo().equalsIgnoreCase(PessoaE.Cliente.name())) {
 						menuCliente(listaPessoa, p, c, listaConta);
