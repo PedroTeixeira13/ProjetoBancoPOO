@@ -20,6 +20,7 @@ import relatorios.RelContaCorrente;
 import relatorios.RelContaPoupanca;
 import relatorios.RelatorioDiretor;
 import relatorios.RelatorioPresidente;
+import util.LimpaTela;
 
 public class MenuInterativo {
 	static double valor;
@@ -92,6 +93,7 @@ public class MenuInterativo {
 		int opcao = 0;
 		do {
 			Thread.sleep(700);
+			LimpaTela.clear();
 			System.out.println("Menu Inicial");
 			System.out.print("-------------\n");
 			System.out.println("1 - Movimentações na Conta");
@@ -125,7 +127,8 @@ public class MenuInterativo {
 		Locale.setDefault(Locale.US);
 		int opcao = 0;
 		do {
-			Thread.sleep(700);
+			Thread.sleep(1500);
+			LimpaTela.clear();
 			System.out.println("Menu Inicial");
 			System.out.print("-------------\n");
 			System.out.println("1 - Movimentações na Conta");
@@ -163,7 +166,8 @@ public class MenuInterativo {
 		Locale.setDefault(Locale.US);
 		int opcao = 0;
 		do {
-			Thread.sleep(700);
+			Thread.sleep(1500);
+			LimpaTela.clear();
 			System.out.println("Menu Inicial");
 			System.out.print("-------------\n");
 			System.out.println("1 - Movimentações na Conta");
@@ -200,7 +204,8 @@ public class MenuInterativo {
 		Locale.setDefault(Locale.US);
 		int opcao = 0;
 		do {
-			Thread.sleep(700);
+			Thread.sleep(1500);
+			LimpaTela.clear();
 			System.out.println("Menu Inicial");
 			System.out.print("-------------\n");
 			System.out.println("1 - Movimentações na Conta");
@@ -236,7 +241,8 @@ public class MenuInterativo {
 		Locale.setDefault(Locale.US);
 		int opcao = 0;
 		do {
-			Thread.sleep(700);
+			Thread.sleep(1500);
+			LimpaTela.clear();
 			System.out.println("\nMovimentações na Conta");
 			System.out.print("-------------\n");
 			System.out.println("1 - Saque");
@@ -298,7 +304,8 @@ public class MenuInterativo {
 		Locale.setDefault(Locale.US);
 		int opcao = 0;
 		do {
-			Thread.sleep(700);
+			Thread.sleep(1500);
+			LimpaTela.clear();
 			System.out.println("Relatórios");
 			System.out.print("-------------\n");
 			System.out.println("1 - Saldo");
