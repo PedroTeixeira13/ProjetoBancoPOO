@@ -16,6 +16,7 @@ import enums.PessoaE;
 import exceptions.CredenciaisNaoEncontradasException;
 import movimentacoes.Operacoes;
 import pessoas.Pessoa;
+import principal.Principal;
 import relatorios.RelContaCorrente;
 import relatorios.RelContaPoupanca;
 import relatorios.RelatorioDiretor;
@@ -110,6 +111,7 @@ public class MenuInterativo {
 				case 3:
 					imprimeExtrato(extrato, c.getCpfTitular());
 					Menu.sair();
+					Principal.main(null);
 					break;
 				default:
 					System.out.println("Opcão inválida, tente novamente!");
@@ -148,6 +150,7 @@ public class MenuInterativo {
 				case 4:
 					imprimeExtrato(extrato, c.getCpfTitular());
 					Menu.sair();
+					Principal.main(null);
 					break;
 				default:
 					System.out.println("Opcão inválida, tente novamente!");
@@ -186,6 +189,7 @@ public class MenuInterativo {
 				case 4:
 					imprimeExtrato(extrato, c.getCpfTitular());
 					Menu.sair();
+					Principal.main(null);
 					break;
 				default:
 					System.out.println("Opcão inválida, tente novamente!");
@@ -223,6 +227,7 @@ public class MenuInterativo {
 				case 4:
 					imprimeExtrato(extrato, c.getCpfTitular());
 					Menu.sair();
+					Principal.main(null);
 					break;
 				default:
 					System.out.println("Opcão inválida, tente novamente!");
