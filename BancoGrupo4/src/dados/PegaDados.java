@@ -39,6 +39,7 @@ public class PegaDados {
 						Cliente c = new Cliente(divide[0], divide[1], divide[2], divide[3]);
 						listaPessoa.add(c);
 					}
+					
 				}
 			}
 		} 
@@ -55,7 +56,6 @@ public class PegaDados {
 
 				if (linha != null) {
 					String[] divide = linha.split(",");
-
 					if (divide[3].equalsIgnoreCase(ContaE.ContaCorrente.name())) {
 						ContaCorrente cc = new ContaCorrente(divide[0], Double.parseDouble(divide[1]),
 								Integer.parseInt(divide[2]), divide[3]);

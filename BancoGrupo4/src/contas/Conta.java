@@ -5,29 +5,30 @@ public abstract class Conta {
 	protected double saldo;
 	protected int agencia;
 	protected String tipo;
-	protected final double taxDeposito = 0.10;
-	protected final double taxSaque = 0.10;
-	protected final double taxTransferencia = 0.20;
+	protected final double TAX_DEPOSITO = 0.10;
+	protected final double TAX_SAQUE = 0.10;
+	protected final double TAX_TRANSFERENCIA = 0.20;
+	protected final double TAX_SEGURO = 0.20;
 	protected double operacoes = 0.0;
 	protected double taxaDeposito = 0.0;
 	protected double taxaSaque = 0.0;
 	protected double taxaTransferencia = 0.0;
-	protected final double taxaSeguro = 0.20;
+	protected double valorTotSeguro = 0.0;
 	
 	public double getTaxaSeguro() {
-		return taxaSeguro;
+		return TAX_SEGURO;
 	}
 
 	public double getTaxDeposito() {
-		return taxDeposito;
+		return TAX_DEPOSITO;
 	}
 
 	public double getTaxSaque() {
-		return taxSaque;
+		return TAX_SAQUE;
 	}
 
 	public double getTaxTransferencia() {
-		return taxTransferencia;
+		return TAX_TRANSFERENCIA;
 	}
 
 	public double getTaxaDeposito() {
@@ -50,6 +51,10 @@ public abstract class Conta {
 		return cpfTitular;
 	}
 	
+	public double getValorTotSeguro() {
+		return valorTotSeguro;
+	}
+
 	public double getSaldo() {
 		return saldo;
 	}
@@ -78,35 +83,33 @@ public abstract class Conta {
 	
 	public void sacar(double valor) {
 		if (this.getSaldo() > valor) {
-			this.saldo -= valor + taxSaque;
+			this.saldo -= valor + TAX_SAQUE;
 			this.operacoes += valor;
-			this.taxaSaque += taxSaque;
-
+			this.taxaSaque += TAX_SAQUE;
 		}
 	}
 	
 	public void depositar(double valor) {
-		this.saldo += valor - taxDeposito;
+		this.saldo += valor - TAX_DEPOSITO;
 		this.operacoes += valor;
-		this.taxaDeposito += taxDeposito;
+		this.taxaDeposito += TAX_DEPOSITO;
 	}
 	
 	public void transferir(Conta destino, double valor) {
 		if (this.getSaldo() > valor) {
 			destino.saldo += valor;
-			this.saldo -= (valor + taxTransferencia);
+			this.saldo -= (valor + TAX_TRANSFERENCIA);
 			this.operacoes += valor;
-			this.taxaTransferencia += taxTransferencia;
+			this.taxaTransferencia += TAX_TRANSFERENCIA;
 		} 
 	}
 	public void seguro(double valor){
-		
-		valor *= taxaSeguro;
-
-		if (this.saldo >= valor){
-			this.saldo -= valor;
+		double valorAux = 0;
+		valorAux = valor * TAX_SEGURO;
+		if (this.saldo >= valorAux){
+			this.saldo -= valorAux;
+			this.valorTotSeguro += valor;
 		}
-
+		
 	}
-
 }

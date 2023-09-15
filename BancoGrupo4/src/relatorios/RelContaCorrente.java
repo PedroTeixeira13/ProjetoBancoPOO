@@ -16,7 +16,7 @@ public class RelContaCorrente {
 			System.out.println("\nRelatório ContaCorrente gerado com sucesso!\n");
 			ps.print("Total gasto em operações: " + c.getOperacoes() + "\n\nTotal taxação de saque: " + c.getTaxaSaque()
 					+ "\nTotal taxação de deposito: " + c.getTaxaDeposito() + "\nTotal taxação de transferencia: "
-					+ c.getTaxaTransferencia());
+					+ c.getTaxaTransferencia() + "\nTotal do valor referente ao seguro de vida: " + c.getValorTotSeguro());
 			ps.close();
 
 		} catch (FileNotFoundException FNFError){

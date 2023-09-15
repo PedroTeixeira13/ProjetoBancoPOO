@@ -16,7 +16,8 @@ public class RelatorioPresidente {
 		for (int i = 0; i<listaConta.size(); i++) {
 			capital += listaConta.get(i).getSaldo();
 		}
-		texto = "Capital Total no banco R$"+capital;
+		String capitalA = String.format("%.2f", capital);
+		texto = "Capital Total no banco R$" + capitalA;
 		try {
 			PrintWriter ps = new PrintWriter("BancoGrupo4\\src\\relatorios\\relatorioPresidente" + dataHoraCompleta + ".txt");
 			ps.print("SERRA BANK \n\n" + texto);

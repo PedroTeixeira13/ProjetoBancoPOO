@@ -62,6 +62,7 @@ public class MenuInterativo {
 					System.out.print("\n-------------\n");
 					System.out.println("\nSeja Bem-vindo(a), " + p.getNome() + "!\n");
 					System.out.print("-------------\n\n\n");
+					extrato += "Usúario: " + p.getNome() + " | CPF:  " + c.getCpfTitular() + " | Agencia: " + c.getAgencia() + "\n\n";
 					if (p.getCargo().equalsIgnoreCase(PessoaE.Cliente.name())) {
 						menuCliente(listaPessoa, p, c, listaConta);
 					} else if (p.getCargo().equalsIgnoreCase(PessoaE.Gerente.name())) {
@@ -82,6 +83,7 @@ public class MenuInterativo {
 		} catch (NullPointerException error) {
 			throw new CredenciaisNaoEncontradasException(listaPessoa, listaConta, totalAg);
 		}
+		
 	}
 
 	public static void menuCliente(List<Pessoa> listaPessoa, Pessoa p, Conta c, List<Conta> listaConta)
