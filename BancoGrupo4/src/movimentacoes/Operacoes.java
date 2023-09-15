@@ -66,7 +66,6 @@ public class Operacoes {
 			if (c2.getCpfTitular().equals(destino)) {
 				cDestino = listaConta.get(i);
 			}
-			
 		}
 		
 		if (cDestino == null) {
@@ -75,7 +74,7 @@ public class Operacoes {
 		
 		else if (valor2 < c.getSaldo() + c.getTaxTransferencia() && valor2 > 0) {
 			c.transferir(cDestino, valor2);
-			System.out.println("\nTransferência de R$" + valor2 + " para a conta do CPF: " + destino
+			System.out.println("\nTransferência de R$" + valor2 + " para o CPF " + destino
 					+ " realizada com sucesso!");
 			System.out.printf("Seu novo saldo é de: R$%.2f\n\n", c.getSaldo());
 			return "Tranferência de " + valor2 + " para a conta do CPF: " + destino + ".\n";
@@ -117,7 +116,7 @@ public class Operacoes {
 			System.out.print("--------------------------------\n\n");
 		}else if(c.getAgencia() == 0002){
 			System.out.print("--------------------------------\n");
-			System.out.println("Você gere " + totalAg[1] + " contas " + "na agência 000" + c.getAgencia() + "\n");
+			System.out.print("Você gere " + totalAg[1] + " contas " + "na agência 000" + c.getAgencia() + "\n");
 			System.out.print("--------------------------------\n\n");
 		}else {
 			System.out.println("Número da agência da sua conta é invalido. ");

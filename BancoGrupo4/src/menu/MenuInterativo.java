@@ -1,6 +1,6 @@
 package menu;
 
-import java.io.BufferedWriter;
+import java.io.BufferedWriter; 
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -25,7 +25,7 @@ public class MenuInterativo {
 	static double valor;
 	static Scanner sc = new Scanner(System.in);
 	static String extrato = "SERRA BANK\n\n";
-
+	
 	public static void menu(List<Pessoa> listaPessoa, List<Conta> listaConta, int[] totalAg) throws Exception {
 		Locale.setDefault(Locale.US);
 		String cpf = "";
@@ -45,34 +45,34 @@ public class MenuInterativo {
 				Thread.sleep(700);
 				for (int i = 0; i < listaConta.size(); i++) {
 					c1 = listaConta.get(i);
-					if (c1.getCpfTitular().equals(cpf)) {
+					if (c1.getCpfTitular().equalsIgnoreCase(cpf)) {
 						c = listaConta.get(i);
 					}
 				}
 				for (int i = 0; i < listaPessoa.size(); i++) {
 					p1 = listaPessoa.get(i);
-					if (p1.getCpf().equals(cpf)) {
+					if (p1.getCpf().equalsIgnoreCase(cpf)) {
 						p = listaPessoa.get(i);
 					}
 				}
 
-				if (p.getCpf().equals(cpf) && p.getSenha().equals(senha)) {
+				if (p.getCpf().equalsIgnoreCase(cpf) && p.getSenha().equalsIgnoreCase(senha)) {
 					System.out.println("Logado como " + p.getCargo());
 					Thread.sleep(700);
 					System.out.print("\n-------------\n");
 					System.out.println("\nSeja Bem-vindo(a) " + p.getNome() + "!\n");
 					System.out.print("-------------\n\n\n");
-					if (p.getCargo().equals(PessoaE.Cliente.name())) {
+					if (p.getCargo().equalsIgnoreCase(PessoaE.Cliente.name())) {
 						menuCliente(listaPessoa, p, c, listaConta);
-					} else if (p.getCargo().equals(PessoaE.Gerente.name())) {
+					} else if (p.getCargo().equalsIgnoreCase(PessoaE.Gerente.name())) {
 						menuGerente(listaPessoa, p, c, listaConta, totalAg);
-					} else if (p.getCargo().equals(PessoaE.Diretor.name())) {
+					} else if (p.getCargo().equalsIgnoreCase(PessoaE.Diretor.name())) {
 						menuDiretor(listaPessoa, p, c, listaConta);
-					} else if (p.getCargo().equals(PessoaE.Presidente.name())) {
+					} else if (p.getCargo().equalsIgnoreCase(PessoaE.Presidente.name())) {
 						menuPresidente(listaPessoa, p, c, listaConta);
 					}
 				} else {
-					System.out.println("Senha incorreta, tente novamemente!");
+					System.out.println("Senha incorreta, tente novamemente!\n");
 					menu(listaPessoa, listaConta, totalAg);
 				}
 
@@ -309,15 +309,26 @@ public class MenuInterativo {
 			System.out.print("-------------\n");
 			switch (opcao) {
 				case 1:
-					System.out.println("\n\nSaldo em conta: " + c.getSaldo() + "\n\n");
+					String saldo2 = String.format("%.2f", c.getSaldo());
+					System.out.println("\n\nSaldo em conta: " + saldo2 + "\n\n");
 					Thread.sleep(600);
 					break;
 				case 2:
-					RelContaCorrente.relatorioCC(c);
-					break;
+					if(c.getTipo().equalsIgnoreCase("ContaPoupanca")) {
+						System.out.println("\n\nVocê não possui uma conta corrente!\n\n");
+						break;
+					}else {
+						RelContaCorrente.relatorioCC(c);
+						break;
+					}
 				case 3:
-					RelContaPoupanca.relatorioCP(c);
-					break;
+					if(c.getTipo().equalsIgnoreCase("ContaCorrente")) {
+						System.out.println("\n\nVocê não possui uma conta poupanca!\n\n");
+						break;
+					}else {
+						RelContaPoupanca.relatorioCP(c);
+						break;
+					}
 				case 4:
 					Operacoes.seguroOP(c);
 					break;
