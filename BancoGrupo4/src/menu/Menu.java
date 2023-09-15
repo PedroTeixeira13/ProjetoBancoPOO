@@ -40,10 +40,17 @@ public class Menu {
 				+ "...-=#################...Seja Bem-vindo(a) ao Serra Bank...################=-..\r\n");
 	}
 	
-	public static void sair() {
+	public static void sair() throws InterruptedException {
+		System.out.print("-------------\n");
+		System.out.print("Saindo");
+		Thread.sleep(500);
+		System.out.print(".");
+		Thread.sleep(500);
+		System.out.print(".");
+		Thread.sleep(500);
+		System.out.println(".");
+		Thread.sleep(500);
+		System.out.print("-------------\n");
 		System.out.println("\nObrigado por utilizar o nosso Banco!\n");
-		System.out.print("-------------\n");
-		System.out.println("Saindo...");
-		System.out.print("-------------\n");
 	}
 }

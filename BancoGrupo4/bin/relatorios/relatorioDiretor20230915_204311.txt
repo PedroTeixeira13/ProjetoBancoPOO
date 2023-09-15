@@ -1,0 +1,14 @@
+SERRA BANK 
+
+Nome: Ana, CPF: 01, Agencia: 2
+Nome: Arthur, CPF: 02, Agencia: 2
+Nome: Breno, CPF: 03, Agencia: 2
+Nome: Carlos, CPF: 04, Agencia: 2
+Nome: João, CPF: 05, Agencia: 1
+Nome: Maria, CPF: 06, Agencia: 1
+Nome: Pedro, CPF: 07, Agencia: 1
+Nome: Rafael, CPF: 08, Agencia: 1
+Nome: Rodrigo, CPF: 09, Agencia: 1
+Nome: Sofia, CPF: 10, Agencia: 1
+Nome: Thomas, CPF: 11, Agencia: 2
+Nome: Vitor, CPF: 12, Agencia: 1
